@@ -1,0 +1,82 @@
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 101;
+    background: url("..//backgroundNavbar.webp") -50px 0,linear-gradient(#84237b,#5b0d88);
+    background-position-x: 50%;    
+    background-position-y: 50%;
+    background-size: auto auto;
+    background-repeat: no-repeat;    
+}
+*{
+  font-family: "Montserrat", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600;
+  font-style: normal;
+}
+.white{
+    color: #FFFFFF;
+}
+.card {
+  width: 230px;
+  border-radius: 8px;
+  padding: 10px;
+  height: 378px;
+  padding: 5px;
+  text-align: center;
+  transition: box-shadow 0.3s;
+  border-radius: 8px;
+
+}
+.card:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.card-img {
+  width: 100%;
+  border-radius: 8px;
+}
+.card-title {
+  font-size: 16px;
+  margin: 10px 0;
+}
+.card-price {
+  margin: 5px 0;
+  color: #E31235
+;
+}
+.price-old {
+  text-decoration: line-through;
+  color: #888;
+  margin-left: 5px;
+}
+.card-btn {
+  background-color: #a73afde6;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.card-btn:hover {
+  background-color:#7612c8e2 ;
+}
+.carts{
+  flex-wrap: wrap;
+  align-items: top;
+  display: flex;
+}
+.gray{
+    color:#9E9E9E;
+}.ant-btn-variant-solid{
+    background: transparent!important;
+    border: 1px solid white;
+    width: 50px!important;
+    height: 50px!important;
+}
+.wb-btn{
+    background-color: #a73afde6;
+    border: none;
+    color: #FFFFFF;
+    border-radius: 18px;
+}
+@import 'tailwindcss'
