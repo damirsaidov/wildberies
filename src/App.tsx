@@ -6,6 +6,9 @@ import Login from "./pages/login";
 import GetProduct from "./pages/getProduct";
 import Register from "./pages/register";
 import AboutId from "./pages/aboutId";
+import Wishlist from "./pages/wishlist";
+import Cart from "./pages/cart";
+import Profile from "./pages/profile";
 
 export const router = createBrowserRouter([
   {
@@ -36,6 +39,18 @@ export const router = createBrowserRouter([
       {
         path: "register",
         element: <Register/>
+      },
+      {
+        path: "wishlist",
+        element: <Wishlist/>
+      },
+      {
+        path: "cart",
+        element: <Cart/>
+      },
+      {
+        path: "profile",
+        element: <Profile/>
       }
     ]
   },

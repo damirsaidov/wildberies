@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 export const pokemonApi = createApi({
   reducerPath: "pokemonApi",
   baseQuery: fetchBaseQuery({
-    baseUrl: "http://37.27.29.18:8002/",
+    baseUrl: "https://store-api.softclub.tj/",
   }),
   endpoints: (builder) => ({
     getProducts: builder.query<any, void>({

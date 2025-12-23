@@ -1,7 +1,5 @@
-import React from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetProductsByCategQuery } from '../services/api'
-import Loader from '../components/loader'
 const GetProduct = () => {
   const { id } = useParams()
   const { data } = useGetProductsByCategQuery(id)
@@ -18,7 +16,7 @@ const GetProduct = () => {
               </div>
               <img
                 style={{ height: "200px", objectFit: "cover", margin: "auto" }}
-                src={`http://37.27.29.18:8002/images/${e.image}`}
+                src={`https://store-api.softclub.tj/images/${e.image}`}
               />
               <h1 className='card-title'>{e.productName}</h1>
               <div className="justify-center card-price flex gap-2 items-center mt-1 ">

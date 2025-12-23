@@ -88,6 +88,20 @@
     color: #FFFFFF;
     border-radius: 18px;
 }
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  padding: 24px;
+  justify-self: center;
+}
+.product-card {
+  width: 300px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
 @media (max-width:520px) {
   .muddmud{
     flex-direction: column!important;

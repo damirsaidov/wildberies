@@ -9,7 +9,7 @@ const Login = () => {
     const [messageApi, context] = useMessage()
     async function login() {
   try {
-    const res = await fetch("http://37.27.29.18:8002/Account/login", {
+    const res = await fetch("https://store-api.softclub.tj/Account/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userName: name, password: pass }),
@@ -19,6 +19,7 @@ const Login = () => {
     }
     const data = await res.json();
     localStorage.setItem("token", data.data);
+    localStorage.setItem("name", name)
     messageApi.success("Logged in successfully");
     setTimeout(() => navigate("/"), 2000);
   } catch (error) {

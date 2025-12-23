@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from 'react'
-import { Link, Outlet, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 import { FaUser, FaShoppingCart, FaMapMarkerAlt } from "react-icons/fa";
-import { HiMenu } from "react-icons/hi";
 import { Menu, Drawer, Button } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
+import { FaHeart } from "react-icons/fa";
 const Layout = () => {
   const [categ, setCateg] = useState([])
   const [subcategory, setSubCategory] = useState([])
   async function getCategory() {
     try {
-      const res = await fetch('http://37.27.29.18:8002/Category/get-categories')
+      const res = await fetch('https://store-api.softclub.tj/Category/get-categories')
       const data = await res.json()
       setCateg(data.data)
     } catch (error) {
@@ -18,7 +18,7 @@ const Layout = () => {
   }
   async function getSubCategories(id: any) {
     try {
-      const res = await fetch(`http://37.27.29.18:8002/Category/get-category-by-id?id=${id}`)
+      const res = await fetch(`https://store-api.softclub.tj/Category/get-category-by-id?id=${id}`)
       const data = await res.json()
       setSubCategory(data?.data?.subCategories)
     } catch (error) {
@@ -67,7 +67,7 @@ const Layout = () => {
                   <Menu
                     style={{ width: 480 }}
                     mode="vertical"
-                    items={categ.map(c => ({
+                    items={categ.map((c: any) => ({
                       key: String(c.id),
                       label: (
                         <div className="drawr" style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
@@ -86,7 +86,7 @@ const Layout = () => {
                   <Menu
                     style={{ width: 580 }}
                     mode="vertical"
-                    items={subcategory?.map(sc => ({
+                    items={subcategory?.map((sc: any) => ({
                       key: String(sc.id),
                       label: sc.subCategoryName,
                       onClick: () => {
@@ -112,36 +112,35 @@ const Layout = () => {
               </div>
             </div>
             <div className="flex items-center gap-6 text-white pt-7">
-              <div className="flex flex-col items-center">
-                <FaMapMarkerAlt size={20} />
-                <p className='text-[#A0A0A0]'>Адреса</p>
+              <div onClick={() => navigate(`/wishlist`)} className="flex flex-col items-center">
+                <FaHeart size={20} />
+                <p className='text-[#A0A0A0]'>Избранное</p>
               </div>
-              <div onClick={() => navigate("/login")} className="flex flex-col items-center">
+              <div className="flex flex-col items-center">
                 {localStorage.getItem("token") ? (
-                  <>
-
-                    <FaUser size={20} title="Войти" />
-                    <p className='text-[#A0A0A0]'>Профиль</p>
+                  < >
+                    <FaUser onClick={() => navigate("profile")} size={20} title="Войти" />
+                    <p onClick={() => navigate("profile")} className='text-[#A0A0A0]'>Профиль</p>
                   </>
-                ) : (
-                  <>
-                    <FaUser size={20} title="Войти" />
-                    <p className='text-[#A0A0A0]'>Войти</p>
-                  </>
+              ) : (
+              <>
+                  <FaUser onClick={() => navigate("/login")} size={20} title="Войти" />
+                  <p onClick={() => navigate("/login")} className='text-[#A0A0A0]'>Войти</p>
+              </>
                 )}
-              </div>
-              <div className="flex flex-col items-center">
-                <FaShoppingCart size={20} />
-                <p className='text-[#A0A0A0]'>Корзина</p>
-              </div>
             </div>
-          </nav>
+            <div className="flex flex-col items-center">
+              <FaShoppingCart onClick={() => navigate("cart")} size={20} />
+              <p onClick={() => navigate("cart")} className='text-[#A0A0A0]'>Корзина</p>
+            </div>
         </div>
-      </div>
-      <div style={{ maxWidth: "1400px", margin: "auto" }}>
-        <Outlet />
-      </div>
+      </nav>
     </div>
+      </div >
+  <div style={{ maxWidth: "1400px", margin: "auto" }}>
+    <Outlet />
+  </div>
+    </div >
   )
 }
 
