@@ -35,7 +35,7 @@ const Register = () => {
   return (
     <div>
         {context}
-      <div className="flex flex-col w-150 self-center m-auto rounded-3xl mt-10 shadow-2xl border-gray-400 p-4 ">
+      <div className=" mediaa flex flex-col w-150 self-center m-auto rounded-3xl mt-10 shadow-2xl border-gray-400 p-4 ">
         <form onSubmit={handleLogin}>
         <Input value={name} onChange={(e) => setName(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" placeholder="User Name"/>
         <Input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" placeholder="Phone number"/>

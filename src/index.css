@@ -17,6 +17,15 @@
 .white{
     color: #FFFFFF;
 }
+
+.mx {
+  max-width: 1400px;
+  margin: auto;
+}
+.images {
+  display: flex;
+  gap: 30px;
+}
 .card {
   width: 230px;
   border-radius: 8px;
@@ -79,4 +88,30 @@
     color: #FFFFFF;
     border-radius: 18px;
 }
+@media (max-width:520px) {
+  .muddmud{
+    flex-direction: column!important;
+  }.nav-wb{
+    height: 400px;
+
+  }.navbar{
+    position: relative;
+    background: #5b0d88;
+  }.carts{
+    justify-content: center;
+  }  .images {
+    flex-direction: column;
+    text-align: center;
+  }.dns{
+    display: none!important;
+  }
+  .mediaa{
+    width: 90%;
+    background-color: white;
+    
+  }.ant-menu{
+    width: 50%!important;
+  }
+}
+
 @import 'tailwindcss'

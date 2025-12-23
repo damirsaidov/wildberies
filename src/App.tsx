@@ -5,6 +5,7 @@ import Error from "./components/error";
 import Login from "./pages/login";
 import GetProduct from "./pages/getProduct";
 import Register from "./pages/register";
+import AboutId from "./pages/aboutId";
 
 export const router = createBrowserRouter([
   {
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
         element: <GetProduct/>
       },
 
+      {
+        path: "about/:id",
+        element: <AboutId/>
+      },
       {
         path: "register",
         element: <Register/>
