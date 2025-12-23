@@ -8,12 +8,13 @@ export const pokemonApi = createApi({
     getProducts: builder.query<any, void>({
       query: () => "Product/get-products",
     }),
-    getProductsByCateg: builder.query<any>({
-      query: (id:any) => `Product/get-products?SubcategoryId=${id}`,
+    getProductsByCateg: builder.query<any, string>({
+      query: (id) => `Product/get-products?SubcategoryId=${id}`,
     }),
-    getProductsById: builder.query<any>({
-      query: (id:any) => `Product/get-product-by-id?id=${id}`,
+    getProductsById: builder.query<any, string>({
+      query: (id) => `Product/get-product-by-id?id=${id}`,
     }),
+
   }),
 });
 export const {

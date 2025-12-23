@@ -112,7 +112,7 @@ const Home = () => {
                     {discountPercent}%
                   </div>
                   <div className='absolute' >
-                  {localStorage.getItem("id")?.includes(e.id) ? (
+                  {localStorage.getItem("id")?.includes(String(e.id)) ? (
                     <IoMdHeart onClick={() => removeFromWishlist(e.id)}  size={30} />
                   ) : (
                     <IoIosHeartEmpty onClick={() => addToWish(e.id)}  size={30} />
