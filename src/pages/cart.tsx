@@ -23,7 +23,7 @@ const Cart = () => {
     const getCart = async () => {
         try {
             let res = await fetch(
-                `http://37.27.29.18:8002/Cart/get-products-from-cart`,
+                `https://store-api.softclub.tj/Cart/get-products-from-cart`,
                 {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -88,7 +88,7 @@ const Cart = () => {
     };
     async function deleteFromCart(id: number) {
         try {
-            await fetch(`http://37.27.29.18:8002/Product/delete-product?id=${id}`, {
+            await fetch(`https://store-api.softclub.tj/Product/delete-product?id=${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
