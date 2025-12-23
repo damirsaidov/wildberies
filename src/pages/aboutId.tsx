@@ -2,9 +2,9 @@ import { Space } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetProductsByIdQuery } from '../services/api'
 const AboutId = () => {
-  const { id } = useParams()
+  const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const { data } = useGetProductsByIdQuery(id)
+  const { data } = useGetProductsByIdQuery(id!, { skip: !id })
   return (
     <div className='mt-4'>
       <div className="mx">
@@ -67,7 +67,7 @@ const AboutId = () => {
                 padding: "5px",
               }}
             >
-              Colors:
+              Цвет: 
               <span
                 style={{
                   color: data?.data?.color,
@@ -87,7 +87,6 @@ const AboutId = () => {
               >
                 <h1> Количество: {data?.data?.amount} </h1>
               </div>
-
             </div>
             <button
               style={{ display: "flex", justifySelf: "center" }}
@@ -96,14 +95,10 @@ const AboutId = () => {
             >
               Go back
             </button>
-
           </div>
-
         </div>
-
       </div>
     </div>
   )
 }
-
 export default AboutId

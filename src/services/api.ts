@@ -9,12 +9,11 @@ export const pokemonApi = createApi({
       query: () => "Product/get-products",
     }),
     getProductsByCateg: builder.query<any, string | number>({
-      query: (id) => `Product/get-products?SubcategoryId=${id}`,
+      query: (id:any) => `Product/get-products?SubcategoryId=${id}`,
     }),
     getProductsById: builder.query<any, string | number>({
-      query: (id) => `Product/get-product-by-id?id=${id}`,
+      query: (id:any) => `Product/get-product-by-id?id=${id}`,
     }),
-
   }),
 });
 export const {

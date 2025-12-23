@@ -1,5 +1,5 @@
 import  { useState, useEffect } from "react";
-import { Button, message, Space } from "antd";
+import { message, Space } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 const Wishlist = () => {
@@ -25,7 +25,7 @@ const Wishlist = () => {
     }
     const token = localStorage.getItem("token");
     try {
-      const requests = wishlist.map((id) =>
+      const requests = wishlist.map((id:any) =>
         axios.get(
           `https://store-api.softclub.tj/Product/get-product-by-id?id=${id}`,
           {
@@ -34,8 +34,8 @@ const Wishlist = () => {
         )
       );
       const responses = await Promise.all(requests);
-      const products = responses
-        .map((res) => res?.data?.data)
+      const products:any = responses
+        .map((res:any) => res?.data?.data)
         .filter(Boolean);
       setData(products);
     } catch (error) {
@@ -46,8 +46,8 @@ const Wishlist = () => {
   useEffect(() => {
     getData();
   }, []);
-  const removeFromWishlist = (deleteId) => {
-    const id = localStorage.getItem("id");
+  const removeFromWishlist = (deleteId:any) => {
+    const id:any = localStorage.getItem("id");
     let wishlist = [];
     try {
       const parsed = JSON.parse(id);
@@ -64,10 +64,10 @@ const Wishlist = () => {
         localStorage.removeItem("id");
       }
     }
-    setData((prev) => prev.filter((product) => product.id != deleteId));
+    setData((prev:any) => prev.filter((product:any) => product.id != deleteId));
     messageApi.success("Deleted successfully");
   };
-  const addToCart = async (id) => {
+  const addToCart = async (id:any) => {
     try {
       await axios.post(
         `https://store-api.softclub.tj/Cart/add-product-to-cart?id=${id}`,
@@ -94,7 +94,7 @@ const Wishlist = () => {
         <button className="wb-btn flex justify-self-center m-auto p-2 px-4 mt-4" onClick={() => navigate(-1)}>Go back</button>
         </div>
       ) : (
-        data.map((e) => (
+        data.map((e:any) => (
           <div key={e.id} className="card">
             <div className="product-image">
               <img

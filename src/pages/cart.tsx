@@ -4,8 +4,20 @@ import { IoIosHeartEmpty, IoMdHeart } from 'react-icons/io';
 import { FaRegEye } from 'react-icons/fa';
 import axios from 'axios';
 import useMessage from 'antd/es/message/useMessage';
+interface Product {
+  product: {
+    id: number;
+    productName: string;
+    price: number;
+    discountPrice: number;
+    image: string;
+  }
+}
+interface CartData {
+  productsInCart: Product[];
+}
 const Cart = () => {
-    const [data, setData] = useState([])
+    const [data, setData] = useState<CartData | null>(null) 
     const [messageApi, context] = useMessage()
     const navigate = useNavigate()
     const getCart = async () => {
@@ -19,22 +31,20 @@ const Cart = () => {
                 }
             );
             let data = await res.json()
-            setData(data?.data[0]?.productsinCart || data?.data[0])
+            setData({ productsInCart: data?.data[0]?.productsinCart || [] })
         } catch (error) {
             console.error(error);
         }
     };
-    const removeFromWishlist = (deleteId: any) => {
+    const removeFromWishlist = (deleteId: number) => {
         const id = localStorage.getItem("id");
-        let wishlist = [];
+        let wishlist: number[] = [];
         try {
-            const parsed = JSON.parse(id);
+            const parsed = id ? JSON.parse(id) : [];
             wishlist = Array.isArray(parsed) ? parsed : [parsed];
-        } catch {
-            if (id) wishlist = [id];
-        }
+        } catch {}
         const index = wishlist.findIndex((item) => item == deleteId);
-        if (index !== -1) {
+        if (index != -1) {
             wishlist.splice(index, 1);
             if (wishlist.length) {
                 localStorage.setItem("id", JSON.stringify(wishlist));
@@ -43,11 +53,11 @@ const Cart = () => {
             }
         }
     }
-    function addToWish(id: any) {
+    function addToWish(id: number) { 
         const idx = localStorage.getItem("id");
-        let wishlist = [];
+        let wishlist: number[] = [];
         try {
-            wishlist = JSON.parse(idx) || [];
+            wishlist = idx ? JSON.parse(idx) : [];
         } catch {
             wishlist = [];
         }
@@ -59,7 +69,7 @@ const Cart = () => {
             messageApi.info("This product is already in your wishlist");
         }
     }
-    const addToCart = async (id: any) => {
+    const addToCart = async (id: number) => { 
         try {
             await axios.post(
                 `https://store-api.softclub.tj/Cart/add-product-to-cart?id=${id}`,
@@ -92,7 +102,6 @@ const Cart = () => {
     useEffect(() => {
         getCart()
     }, [])
-    console.log(data)
     return (
         <div>
             {context}
@@ -111,7 +120,7 @@ const Cart = () => {
                     {data?.productsInCart?.map((e: Product) => (
                         <tr key={e.product.id} className="border-b text-center">
                             <td className="p-3">
-                                {localStorage.getItem("id")?.includes(e.product.id) ? (
+                                {localStorage.getItem("id")?.includes(String(e.product.id)) ? (
                                     <IoMdHeart
                                         size={24}
                                         className="cursor-pointer text-red-500"
@@ -162,7 +171,6 @@ const Cart = () => {
                                     Delete
                                 </button>
                             </td>
-
                         </tr>
                     ))}
                 </tbody>
