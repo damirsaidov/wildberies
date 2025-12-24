@@ -36,7 +36,6 @@ const Home = () => {
       messageApi.info("This product is already in your wishlist")
     }
   }
-
   function removeFromWishlist(deleteId: string) {
     const id = localStorage.getItem("id")
     let wishlist: string[] = []
@@ -57,7 +56,6 @@ const Home = () => {
       messageApi.success("Removed successfully")
     }
   }
-
   const addToCart = async (id: string) => {
     try {
       await axios.post(
@@ -74,7 +72,6 @@ const Home = () => {
       messageApi.error("Something went wrong.")
     }
   }
-
   return (
     <div>
       {isLoading && (
@@ -82,13 +79,11 @@ const Home = () => {
           <Loader />
         </div>
       )}
-
       {error && (
         <div style={{ position: 'relative', top: '250px' }}>
           <Error />
         </div>
       )}
-
       {!isLoading && !error && (
         <>
           {context}

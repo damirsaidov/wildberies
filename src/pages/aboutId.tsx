@@ -69,7 +69,7 @@ const AboutId = () => {
             >
               Цвет:
               <span
-              className='bordered'
+                className='bordered'
                 style={{
                   color: data?.data?.color,
                   background: data?.data?.color,

@@ -104,8 +104,8 @@ const Layout = () => {
             <div className="drawr flex-1 mx-4">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
-                <h1 className='text-[16px] white'>Бренды</h1>
-                <Switch checked={darkMode} onChange={setDarkMode}/>
+                  <h1 className='text-[16px] white'>Бренды</h1>
+                  <Switch checked={darkMode} onChange={setDarkMode} />
                 </div>
                 <input
                   type="text"
@@ -126,24 +126,24 @@ const Layout = () => {
                     <FaUser onClick={() => navigate("profile")} size={20} title="Войти" />
                     <p onClick={() => navigate("profile")} className='text-[#A0A0A0]'>Профиль</p>
                   </>
-              ) : (
-              <>
-                  <FaUser onClick={() => navigate("/login")} size={20} title="Войти" />
-                  <p onClick={() => navigate("/login")} className='text-[#A0A0A0]'>Войти</p>
-              </>
+                ) : (
+                  <>
+                    <FaUser onClick={() => navigate("/login")} size={20} title="Войти" />
+                    <p onClick={() => navigate("/login")} className='text-[#A0A0A0]'>Войти</p>
+                  </>
                 )}
+              </div>
+              <div className="flex flex-col items-center">
+                <FaShoppingCart onClick={() => navigate("cart")} size={20} />
+                <p onClick={() => navigate("cart")} className='text-[#A0A0A0]'>Корзина</p>
+              </div>
             </div>
-            <div className="flex flex-col items-center">
-              <FaShoppingCart onClick={() => navigate("cart")} size={20} />
-              <p onClick={() => navigate("cart")} className='text-[#A0A0A0]'>Корзина</p>
-            </div>
+          </nav>
         </div>
-      </nav>
-    </div>
       </div >
-  <div style={{ maxWidth: "1400px", margin: "auto" }}>
-    <Outlet />
-  </div>
+      <div style={{ maxWidth: "1400px", margin: "auto" }}>
+        <Outlet />
+      </div>
     </div >
   )
 }
