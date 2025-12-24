@@ -5,19 +5,19 @@ import { FaRegEye } from 'react-icons/fa';
 import axios from 'axios';
 import useMessage from 'antd/es/message/useMessage';
 interface Product {
-  product: {
-    id: number;
-    productName: string;
-    price: number;
-    discountPrice: number;
-    image: string;
-  }
+    product: {
+        id: number;
+        productName: string;
+        price: number;
+        discountPrice: number;
+        image: string;
+    }
 }
 interface CartData {
-  productsInCart: Product[];
+    productsInCart: Product[];
 }
 const Cart = () => {
-    const [data, setData] = useState<CartData | null>(null) 
+    const [data, setData] = useState<CartData | null>(null)
     const [messageApi, context] = useMessage()
     const navigate = useNavigate()
     const getCart = async () => {
@@ -42,7 +42,7 @@ const Cart = () => {
         try {
             const parsed = id ? JSON.parse(id) : [];
             wishlist = Array.isArray(parsed) ? parsed : [parsed];
-        } catch {}
+        } catch { }
         const index = wishlist.findIndex((item) => item == deleteId);
         if (index != -1) {
             wishlist.splice(index, 1);
@@ -53,7 +53,7 @@ const Cart = () => {
             }
         }
     }
-    function addToWish(id: number) { 
+    function addToWish(id: number) {
         const idx = localStorage.getItem("id");
         let wishlist: number[] = [];
         try {
@@ -69,7 +69,7 @@ const Cart = () => {
             messageApi.info("This product is already in your wishlist");
         }
     }
-    const addToCart = async (id: number) => { 
+    const addToCart = async (id: number) => {
         try {
             await axios.post(
                 `https://store-api.softclub.tj/Cart/add-product-to-cart?id=${id}`,
@@ -143,8 +143,8 @@ const Cart = () => {
                             </td>
                             <td className="p-3">{e.product.productName}</td>
                             <td className="p-3">
-                                <span className="text-red-600 font-bold">
                                     {e.product.price} $
+                                <span className="text-red-600 font-bold">
                                 </span>
                                 <br />
                                 <span className="line-through text-gray-400 text-sm">

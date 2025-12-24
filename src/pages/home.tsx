@@ -1,7 +1,7 @@
 import { useGetProductsQuery } from '../services/api'
 import Loader from '../components/loader'
 import Error from '../components/error'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useMessage from 'antd/es/message/useMessage'
 import { IoIosHeartEmpty } from "react-icons/io";
@@ -22,7 +22,7 @@ const Home = () => {
   const navigate = useNavigate()
   const [value, setValue] = useState('₽')
   const { data, isLoading, error } = useGetProductsQuery()
-
+  
   function addToWish(id: string) {
     const idx = localStorage.getItem("id")
     let wishlist: string[] = []
@@ -78,7 +78,7 @@ const Home = () => {
     }
   }
 
-  return (
+return (
     <div>
       {isLoading && (
         <div style={{ position: 'relative', top: '250px' }}>
@@ -132,7 +132,7 @@ const Home = () => {
                     <span className="price-old line-through text-gray-400">{e.discountPrice} {value}</span>
                   </p>
                   <p className="card-rating pb-2">★★★★☆ (4.5)</p>
-                  <button onClick={() => addToCart(e.id)} className="card-btn">🛒 В корзину</button>
+                  <button onClick={() => localStorage.getItem("token") ? addToCart(e.id) : messageApi.error("Log in first!")} className="card-btn">🛒 В корзину</button>
                 </div>
               )
             })}

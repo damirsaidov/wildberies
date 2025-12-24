@@ -1,4 +1,4 @@
-import  { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { message, Space } from "antd";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ const Wishlist = () => {
     }
     const token = localStorage.getItem("token");
     try {
-      const requests = wishlist.map((id:any) =>
+      const requests = wishlist.map((id: any) =>
         axios.get(
           `https://store-api.softclub.tj/Product/get-product-by-id?id=${id}`,
           {
@@ -34,20 +34,20 @@ const Wishlist = () => {
         )
       );
       const responses = await Promise.all(requests);
-      const products:any = responses
-        .map((res:any) => res?.data?.data)
+      const products: any = responses
+        .map((res: any) => res?.data?.data)
         .filter(Boolean);
       setData(products);
     } catch (error) {
       console.error("Error fetching wishlist products:", error);
-      setData([]); 
+      setData([]);
     }
   }
   useEffect(() => {
     getData();
   }, []);
-  const removeFromWishlist = (deleteId:any) => {
-    const id:any = localStorage.getItem("id");
+  const removeFromWishlist = (deleteId: any) => {
+    const id: any = localStorage.getItem("id");
     let wishlist = [];
     try {
       const parsed = JSON.parse(id);
@@ -64,10 +64,10 @@ const Wishlist = () => {
         localStorage.removeItem("id");
       }
     }
-    setData((prev:any) => prev.filter((product:any) => product.id != deleteId));
+    setData((prev: any) => prev.filter((product: any) => product.id != deleteId));
     messageApi.success("Deleted successfully");
   };
-  const addToCart = async (id:any) => {
+  const addToCart = async (id: any) => {
     try {
       await axios.post(
         `https://store-api.softclub.tj/Cart/add-product-to-cart?id=${id}`,
@@ -90,11 +90,11 @@ const Wishlist = () => {
       {contextHolder}
       {data.length == 0 ? (
         <div className="m-auto">
-        <p className="text-4xl pt-20">Your wishlist is empty!</p>
-        <button className="wb-btn flex justify-self-center m-auto p-2 px-4 mt-4" onClick={() => navigate(-1)}>Go back</button>
+          <p className="text-4xl pt-20">Your wishlist is empty!</p>
+          <button className="wb-btn flex justify-self-center m-auto p-2 px-4 mt-4" onClick={() => navigate(-1)}>Go back</button>
         </div>
       ) : (
-        data.map((e:any) => (
+        data.map((e: any) => (
           <div key={e.id} className="card">
             <div className="product-image">
               <img
@@ -105,7 +105,7 @@ const Wishlist = () => {
             <div className="product-info">
               <h3 className="product-name">{e.productName}</h3>
               <div className="price-row">
-                <Space style={{ justifyContent:"center", padding:"10px" }}>
+                <Space style={{ justifyContent: "center", padding: "10px" }}>
                   <span className="card-price">${e.discountPrice}</span>
                   <span className="price-old">${e.price}</span>
                 </Space>
@@ -114,7 +114,7 @@ const Wishlist = () => {
                 <button className="bg-blue-600 text-white p-3 rounded-2xl" onClick={() => addToCart(e.id)}>
                   + Add to cart
                 </button>
-                <button className="bg-red-600 text-white p-3 rounded-2xl"  onClick={() => removeFromWishlist(e.id)}>
+                <button className="bg-red-600 text-white p-3 rounded-2xl" onClick={() => removeFromWishlist(e.id)}>
                   Delete
                 </button>
               </Space>

@@ -4,7 +4,7 @@ import { useGetProductsByIdQuery } from '../services/api'
 const AboutId = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const { data } = useGetProductsByIdQuery(id??"", { skip: !id })
+  const { data } = useGetProductsByIdQuery(id ?? "", { skip: !id })
   return (
     <div className='mt-4'>
       <div className="mx">
@@ -67,7 +67,7 @@ const AboutId = () => {
                 padding: "5px",
               }}
             >
-              Цвет: 
+              Цвет:
               <span
                 style={{
                   color: data?.data?.color,
