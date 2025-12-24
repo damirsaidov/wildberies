@@ -1,54 +1,74 @@
-# React + TypeScript + Vite
+# 🛍️ Wildberries Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern and feature-rich **frontend web application inspired by Wildberries**, built to deliver a smooth, responsive, and user-friendly shopping experience.
 
-Currently, two official plugins are available:
+🌟 Clean UI  
+🌙 Dark Mode  
+⚡ Fast & Optimized  
+📱 Fully Responsive  
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Features
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+✔️ **Product Management**
+- Get products
+- Product details view
+- Category & Subcategory navigation
+- Advanced filters
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+✔️ **User Features**
+- Register
+- Login
+- Account information
+- Wishlist
+- Cart system
+
+✔️ **UI & UX**
+- Dark / Light mode
+- Responsive design (mobile, tablet, desktop)
+- Media support (images & assets)
+- Smooth interactions
+
+✔️ **E-commerce Essentials**
+- Shopping cart
+- Wishlist management
+- Product filtering
+- Category browsing
+
+---
+
+## 🧩 Main Functions
+
+- 🛒 **Cart**
+- ❤️ **Wishlist**
+- 👤 **Account Info**
+- 🔐 **Login & Register**
+- 🌗 **Dark Mode**
+- 🗂️ **Categories & Subcategories**
+- 🔍 **Filters**
+- 🖼️ **Media Handling**
+
+---
+
+## 🛠️ Tech Stack
+
+> *(Edit this section if needed)*
+
+- **Frontend:** HTML / CSS / JavaScript  
+  or React / Vue / Next.js  
+- **Styling:** CSS / Tailwind / SCSS  
+- **State Management:** Context / Redux (if used)
+
+---
+
+## 📂 Project Structure
+
+```
+src/
+├── components/
+├── pages/
+└── services/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### Project made and developed by *Saiddamir* 
