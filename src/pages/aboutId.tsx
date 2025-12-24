@@ -69,6 +69,7 @@ const AboutId = () => {
             >
               Цвет:
               <span
+              className='bordered'
                 style={{
                   color: data?.data?.color,
                   background: data?.data?.color,
@@ -85,7 +86,7 @@ const AboutId = () => {
                   alignItems: "center",
                 }}
               >
-                <h1> Количество: {data?.data?.amount} </h1>
+                <h1> Количество: {data?.data?.quantity} </h1>
               </div>
             </div>
             <button

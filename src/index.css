@@ -14,9 +14,6 @@
   font-weight: 600;
   font-style: normal;
 }
-.white{
-    color: #FFFFFF;
-}
 
 .mx {
   max-width: 1400px;
@@ -101,6 +98,62 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.dark {
+  height: 2100vh;
+  color: white;
+  background-color: #090909;
+  .ant-btn {
+    color: #1677ff;
+    background-color: #090909;
+    border: 1px solid #1677ff;
+  }
+  .bordered{
+    border: 1px solid white;
+    padding: 12px;
+  }
+  li {
+    color: white !important;
+  }
+  #todowka {
+    background-color: #090909 !important;
+    * {
+      color: white ;
+    }
+  }
+  .ant-table-container,
+  .ant-table-cell {
+    background: black !important;
+    color: white !important;
+    border: 1px solid white !important;
+    border-collapse: collapse !important;
+  }
+  .ant-btn-dangerous {
+    background-color: black;
+    color: #ff4d4f;
+    border: 1px solid #ff4d4f;
+  }
+  .ant-tag {
+    background-color: black !important;
+    border: 1px solid;
+  }
+  .ant-input,
+  .ant-select,
+  .ant-select-item {
+    background-color: black;
+    border: 1px solid #999;
+  }
+  .ant-select-dropdown {
+    background-color: #090909;
+    color: #999;
+  }
+  .ant-input::placeholder,
+  .ant-select-content-value {
+    color: #999;
+  }
+  .ant-input {
+    color: #948b8b;
+  }
 }
 @media (max-width:520px) {
   .muddmud{

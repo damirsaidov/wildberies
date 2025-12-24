@@ -19,7 +19,7 @@ const Login = () => {
     }
     const data = await res.json();
     localStorage.setItem("token", data.data);
-    localStorage.setItem("name", name)
+    localStorage.setItem("name", name);
     messageApi.success("Logged in successfully");
     setTimeout(() => navigate("/"), 2000);
   } catch (error) {

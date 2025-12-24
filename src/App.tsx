@@ -9,7 +9,6 @@ import AboutId from "./pages/aboutId";
 import Wishlist from "./pages/wishlist";
 import Cart from "./pages/cart";
 import Profile from "./pages/profile";
-
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -31,7 +30,6 @@ export const router = createBrowserRouter([
         path: "products/:id",
         element: <GetProduct/>
       },
-
       {
         path: "about/:id",
         element: <AboutId/>

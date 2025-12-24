@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 import { FaUser, FaShoppingCart, FaMapMarkerAlt } from "react-icons/fa";
-import { Menu, Drawer, Button } from 'antd';
+import { Menu, Drawer, Button, Switch } from 'antd';
 import { MenuOutlined } from '@ant-design/icons';
 import { FaHeart } from "react-icons/fa";
 const Layout = () => {
@@ -35,9 +35,10 @@ const Layout = () => {
   const onClose = () => {
     setVisible(false);
   };
+  const [darkMode, setDarkMode] = useState(false)
   const navigate = useNavigate()
   return (
-    <div>
+    <div className={darkMode ? 'dark' : 'white'}>
       <div className='navbar'>
         <div className='h-29 nav-wb' style={{ maxWidth: "1400px", margin: "auto" }}>
           <nav className="w-full muddmud px-4 py-2 flex items-center justify-between">
@@ -102,7 +103,10 @@ const Layout = () => {
             </div>
             <div className="drawr flex-1 mx-4">
               <div className="flex flex-col gap-2">
+                <div className="flex items-center justify-between">
                 <h1 className='text-[16px] white'>Бренды</h1>
+                <Switch checked={darkMode} onChange={setDarkMode}/>
+                </div>
                 <input
                   type="text"
                   placeholder="Найти на Wildberries"

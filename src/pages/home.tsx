@@ -1,14 +1,13 @@
 import { useGetProductsQuery } from '../services/api'
 import Loader from '../components/loader'
 import Error from '../components/error'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import useMessage from 'antd/es/message/useMessage'
 import { IoIosHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import axios from 'axios'
-
 interface Product {
   id: string
   productName: string
@@ -16,13 +15,11 @@ interface Product {
   price: number
   discountPrice: number
 }
-
 const Home = () => {
   const [messageApi, context] = useMessage()
   const navigate = useNavigate()
   const [value, setValue] = useState('₽')
   const { data, isLoading, error } = useGetProductsQuery()
-  
   function addToWish(id: string) {
     const idx = localStorage.getItem("id")
     let wishlist: string[] = []
@@ -78,7 +75,7 @@ const Home = () => {
     }
   }
 
-return (
+  return (
     <div>
       {isLoading && (
         <div style={{ position: 'relative', top: '250px' }}>
@@ -142,5 +139,4 @@ return (
     </div>
   )
 }
-
 export default Home
