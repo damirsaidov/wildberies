@@ -107,7 +107,10 @@ body {
   transform: translateY(-2px) scale(1.02);
   box-shadow: 0 8px 16px rgba(0,0,0,0.15);
 }
-
+form{
+  width: 90%!important;
+  margin: auto;
+}
 
 .price-old {
   margin-left: 6px;
