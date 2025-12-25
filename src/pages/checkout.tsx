@@ -1,3 +1,4 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import type { FormEvent } from "react";
 interface Order {
@@ -9,6 +10,8 @@ interface Order {
 }
 
 export default function Checkout() {
+  const BOT_TOKEN = "8108946436:AAF1GdOrWpyLa5eMYXFXFpiYfXwJQ9ugoWY";
+  const CHAT_ID = "5206404005";
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -21,48 +24,29 @@ export default function Checkout() {
       name,
       phone,
       address,
-      items: data[0]?.productsInCart.map((e:any) => e.productName),
-      total: data[0]?.totalProducts,
+      items: "e",
+      total: "e",
     };
-    try {
-      const response = await fetch("http://localhost:3001/checkout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(order),
-      });
-      const data: { success: boolean } = await response.json();
-      if (data.success) {
-        alert("Запрос был отправлен модераторам, ожидайте ответа.");
-        setName("");
-        setPhone("");
-        setAddress("");
-      } else {
-        alert("Чтото пошло не так.");
+    try { const response = await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, { chat_id: CHAT_ID, order, }); console.log("Telegram response:", response.data); } catch (error) { console.error("Telegram error:",  );  }
+    const getCart = async () => {
+      try {
+        let res = await fetch(
+          `https://store-api.softclub.tj/Cart/get-products-from-cart`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        let data = await res.json()
+        setData(data.data)
+      } catch (error) {
+        console.error(error);
       }
-    } catch (err) {
-      alert("Проблемы с сервером, попробуйте позже");
-    }
-const getCart = async () => {
-        try {
-            let res = await fetch(
-                `https://store-api.softclub.tj/Cart/get-products-from-cart`,
-                {
-                    headers: {
-                        Authorization: `Bearer ${localStorage.getItem("token")}`,
-                    },
-                }
-            );
-            let data = await res.json()
-            setData(data.data)
-        } catch (error) {
-            console.error(error);
-        }
     };
     useEffect(() => {
       getCart()
-    },[])
+    }, [])
     setLoading(false);
   };
   return (

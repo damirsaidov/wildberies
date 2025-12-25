@@ -97,7 +97,7 @@ const getCart = async () => {
                           <img
                             src={`https://store-api.softclub.tj/images/${c.categoryImage}`}
                             alt={c.categoryName}
-                            style={{ width: 40, objectFit: 'contain' }}
+                            style={{ width: 40, objectFit: 'contain',borderRadius:"8px" }}
                           />
                           <span>{c.categoryName}</span>
                         </div>
