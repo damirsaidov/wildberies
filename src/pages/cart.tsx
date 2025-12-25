@@ -4,15 +4,6 @@ import { IoIosHeartEmpty, IoMdHeart } from 'react-icons/io';
 import { FaRegEye } from 'react-icons/fa';
 import axios from 'axios';
 import useMessage from 'antd/es/message/useMessage';
-interface Product {
-    product: {
-        id: number;
-        productName: string;
-        price: number;
-        discountPrice: number;
-        image: string;
-    }
-}
 const Cart = () => {
     const [data, setData] = useState<any>(null)
     const [messageApi, context] = useMessage()
@@ -83,10 +74,21 @@ const Cart = () => {
             console.error(error);
         }
     };
-    console.log()
+    function checkAcc() {
+        if (!localStorage.getItem('token')) {
+            messageApi.info("Сначала зарегистрируйтесь!")
+        setInterval(() => {
+            navigate("/login")
+        },2000)
+        }
+        
+    }
+    useEffect(() => {
+        checkAcc()
+    },[])
     async function deleteFromCart(id: number) {
         try {
-            await fetch(`https://store-api.softclub.tj/Product/delete-product?id=${id}`, {
+            await fetch(`https://store-api.softclub.tj/Cart/delete-product-from-cart?id=${id}`, {
                 method: "DELETE",
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -117,7 +119,7 @@ const Cart = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {data ? data[0]?.productsInCart.map((e: Product) => (
+                    {data ? data[0]?.productsInCart.map((e: any) => (
                         <tr key={e.product.id} className="border-b text-center">
                             <td className="p-3">
                                 {localStorage.getItem("id")?.includes(String(e.product.id)) ? (
@@ -143,7 +145,7 @@ const Cart = () => {
                             </td>
                             <td className="p-3">{e.product.productName}</td>
                             <td className="p-3">
-                                    {e.product.price} $
+                                {e.product.price} $
                                 <span className="text-red-600 font-bold">
                                 </span>
                                 <br />
@@ -165,7 +167,7 @@ const Cart = () => {
                                     🛒 Add
                                 </button>
                                 <button
-                                    onClick={() => deleteFromCart(e.product.id)}
+                                    onClick={() => deleteFromCart(e.id)}
                                     className="px-3 py-1 bg-red-600 text-white rounded"
                                 >
                                     Delete
@@ -175,6 +177,9 @@ const Cart = () => {
                     )) : ""}
                 </tbody>
             </table>
+            <div className="flex justify-end">
+            <button onClick={() => navigate('/checkout')} className='rounded-2xl w-53 flex justify-center mt-4 bg-purple-600 text-white p-2 px-5'>Оплатить</button>
+      </div>
         </div>
     );
 }

@@ -158,6 +158,13 @@ body {
   background-color: var(--bg-dark);
   color: var(--text-dark);
   height: 2100vh;
+  input{
+    background-color: black;
+    border: 1px solid white;
+    color: white;
+  }input::placeholder{
+    color: grey;
+  }
 }
 
 .dark .navbar {
@@ -218,7 +225,14 @@ body {
   flex: 1 1 calc(25% - 24px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
+.dark{ 
+  .ant-menu{
+    *{
+      background-color: #0e0e11;
+      color: white;
+    }
+  }
+}
 @media (max-width: 1024px) {
   .card { flex: 1 1 calc(33% - 20px); }
 }

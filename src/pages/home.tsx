@@ -312,7 +312,7 @@ const Home = () => {
           </div>
         </Carousel>
           <div className="carts">
-            {data?.data?.products?.slice(0, 4).map((e: Product) => {
+            {data?.data?.products?.slice(2, 6).map((e: Product) => {
               const discountPercent = Math.round(((e.price - e.discountPrice) / e.price) * 100)
               const wishlistIds = JSON.parse(localStorage.getItem("id") ?? "[]") as string[]
               return (

@@ -36,10 +36,10 @@ const Login = () => {
         {context}
       <div className="mediaa flex flex-col w-150 self-center m-auto rounded-3xl mt-10 shadow-2xl border-gray-400 p-4 ">
         <form onSubmit={handleLogin}>
-        <Input value={name} onChange={(e) => setName(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" placeholder="User Name"/>
-        <Input value={pass} onChange={(e) => setPass(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" type={"password"} placeholder="Password"/>
-          <button type="submit" className="w-full card-btn text-center">Log in</button>
-          <h1 className="p-2">Dont have an account? <span style={{color:"orange", borderBottom:"1px solid orange"}} onClick={() => navigate("/register")}>Register</span></h1>
+        <Input value={name} onChange={(e) => setName(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" placeholder="Имя пользователя"/>
+        <Input value={pass} onChange={(e) => setPass(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" type={"password"} placeholder="Пароль"/>
+          <button type="submit" className="w-full card-btn text-center">Войти</button>
+          <h1 className="p-2">Нету аккаунта? <span style={{color:"orange", borderBottom:"1px solid orange"}} onClick={() => navigate("/register")}>Регистрация</span></h1>
         </form>
       </div>
     </div>

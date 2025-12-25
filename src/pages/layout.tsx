@@ -7,6 +7,7 @@ import { FaHeart } from "react-icons/fa";
 const Layout = () => {
   const [categ, setCateg] = useState([])
   const [subcategory, setSubCategory] = useState([])
+  const [data, setData] = useState<any>(null)
   async function getCategory() {
     try {
       const res = await fetch('https://store-api.softclub.tj/Category/get-categories')
@@ -16,6 +17,7 @@ const Layout = () => {
       console.error(error)
     }
   }
+
   async function getSubCategories(id: any) {
     try {
       const res = await fetch(`https://store-api.softclub.tj/Category/get-category-by-id?id=${id}`)
@@ -25,9 +27,28 @@ const Layout = () => {
       console.error(error)
     }
   }
-  useEffect(() => {
-    getCategory()
-  }, [])
+ useEffect(() => {
+  getCategory();
+  getCart();
+}, []);
+
+const getCart = async () => {
+  try {
+    const res = await fetch(
+      `https://store-api.softclub.tj/Cart/get-products-from-cart`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    const result = await res.json();
+    setData(result.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -35,6 +56,7 @@ const Layout = () => {
   const onClose = () => {
     setVisible(false);
   };
+
   const [darkMode, setDarkMode] = useState(false)
   const navigate = useNavigate()
   return (
@@ -136,6 +158,7 @@ const Layout = () => {
               <div className="flex flex-col items-center">
                 <FaShoppingCart onClick={() => navigate("cart")} size={20} />
                 <p onClick={() => navigate("cart")} className='text-[#A0A0A0]'>Корзина</p>
+                <p className='absolute top-12 right-65 -z-202 bg-red-400 w-6 text-center rounded-2xl h-6 text-white'>{data ? data[0]?.totalProducts : "0"}</p>
               </div>
             </div>
           </nav>
