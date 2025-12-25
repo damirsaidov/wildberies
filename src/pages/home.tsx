@@ -109,7 +109,7 @@ const Home = () => {
         >
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
-              src="../../public/image.png"
+              src="../../image.png"
               width="100%"
               height="auto"
               style={{
@@ -124,7 +124,7 @@ const Home = () => {
             style={{ display: "flex", width: "80%", justifyContent: "center" }}
           >
             <img
-              src="../../public/image.png"
+              src="../../image.png"
               style={{
                 borderRadius: "12px",
                 objectFit: "cover",
@@ -135,7 +135,7 @@ const Home = () => {
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
-              src="../../public/image.png"
+              src="../../image.png"
               width="100%"
               height="100%"
               style={{
@@ -191,7 +191,7 @@ const Home = () => {
         >
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
-              src="../../public/image.png"
+              src="../../image.png"
               width="100%"
               height="auto"
               style={{
@@ -206,7 +206,7 @@ const Home = () => {
             style={{ display: "flex", width: "80%", justifyContent: "center" }}
           >
             <img
-              src="../../public/image.png"
+              src="../../image.png"
               style={{
                 borderRadius: "12px",
                 objectFit: "cover",
@@ -217,7 +217,7 @@ const Home = () => {
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
-              src="../../public/image.png"
+              src="../../image.png"
               width="100%"
               height="100%"
               style={{
@@ -273,7 +273,7 @@ const Home = () => {
         >
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
-              src="../../public/image.png"
+              src="../../image.png"
               width="100%"
               height="auto"
               style={{
@@ -288,7 +288,7 @@ const Home = () => {
             style={{ display: "flex", width: "80%", justifyContent: "center" }}
           >
             <img
-              src="../../public/image.png"
+              src="../../image.png"
               style={{
                 borderRadius: "12px",
                 objectFit: "cover",
@@ -299,7 +299,7 @@ const Home = () => {
           </div>
           <div style={{ display: "flex", justifyContent: "center" }}>
             <img
-              src="../../public/image.png"
+              src="../../image.png"
               width="100%"
               height="100%"
               style={{
