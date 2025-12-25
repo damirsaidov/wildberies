@@ -8,6 +8,7 @@ import { IoIosHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import axios from 'axios'
+import { Carousel } from 'antd'
 interface Product {
   id: string
   productName: string
@@ -31,9 +32,9 @@ const Home = () => {
     if (!wishlist.includes(id)) {
       wishlist.push(id)
       localStorage.setItem("id", JSON.stringify(wishlist))
-      messageApi.success("Added to wishlist")
+      messageApi.success("Добавлено в избранные")
     } else {
-      messageApi.info("This product is already in your wishlist")
+      messageApi.info("Этот продукт уже есть в ваших избранных")
     }
   }
   function removeFromWishlist(deleteId: string) {
@@ -53,7 +54,7 @@ const Home = () => {
       } else {
         localStorage.removeItem("id")
       }
-      messageApi.success("Removed successfully")
+      messageApi.success("Успешно удалено")
     }
   }
   const addToCart = async (id: string) => {
@@ -67,9 +68,9 @@ const Home = () => {
           },
         }
       )
-      messageApi.success("Added to cart")
+      messageApi.success("Добавлено в корзину.")
     } catch {
-      messageApi.error("Something went wrong.")
+      messageApi.error("Чтото пошло не так.")
     }
   }
   return (
@@ -97,8 +98,57 @@ const Home = () => {
               <option value="c">🇹🇯 TJS</option>
             </select>
           </div>
+          <Carousel
+          className="car"
+          style={{ width: "1200px", height: "454px", borderRadius:"8px", margin:"auto" }}
+          autoplay
+          infinite
+          dots
+          arrows
+          speed={800}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src="../../public/image.png"
+              width="100%"
+              height="auto"
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
+          <div
+            style={{ display: "flex", width: "80%", justifyContent: "center" }}
+          >
+            <img
+              src="../../public/image.png"
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src="../../public/image.png"
+              width="100%"
+              height="100%"
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
+        </Carousel>
           <div className="carts">
-            {data?.data?.products?.slice(0, 6).map((e: Product) => {
+            {data?.data?.products?.slice(0, 4).map((e: Product) => {
               const discountPercent = Math.round(((e.price - e.discountPrice) / e.price) * 100)
               const wishlistIds = JSON.parse(localStorage.getItem("id") ?? "[]") as string[]
               return (
@@ -106,7 +156,7 @@ const Home = () => {
                   <div className="absolute bottom-87 left-40 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
                     {discountPercent}%
                   </div>
-                  <div className='absolute'>
+                  <div className='absolute left-3'>
                     {wishlistIds.includes(e.id) ? (
                       <IoMdHeart onClick={() => removeFromWishlist(e.id)} size={30} />
                     ) : (
@@ -128,6 +178,171 @@ const Home = () => {
                 </div>
               )
             })}
+            
+          </div>
+          <Carousel
+          className="car"
+          style={{ width: "1200px", height: "454px", borderRadius:"8px", margin:"auto" }}
+          autoplay
+          infinite
+          dots
+          arrows
+          speed={800}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src="../../public/image.png"
+              width="100%"
+              height="auto"
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
+          <div
+            style={{ display: "flex", width: "80%", justifyContent: "center" }}
+          >
+            <img
+              src="../../public/image.png"
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src="../../public/image.png"
+              width="100%"
+              height="100%"
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
+        </Carousel>
+          <div className="carts">
+            {data?.data?.products?.slice(0, 4).map((e: Product) => {
+              const discountPercent = Math.round(((e.price - e.discountPrice) / e.price) * 100)
+              const wishlistIds = JSON.parse(localStorage.getItem("id") ?? "[]") as string[]
+              return (
+                <div className="card relative mt-5" key={e.id}>
+                  <div className="absolute bottom-87 left-40 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    {discountPercent}%
+                  </div>
+                  <div className='absolute left-3'>
+                    {wishlistIds.includes(e.id) ? (
+                      <IoMdHeart onClick={() => removeFromWishlist(e.id)} size={30} />
+                    ) : (
+                      <IoIosHeartEmpty onClick={() => addToWish(e.id)} size={30} />
+                    )}
+                    <FaRegEye size={30} onClick={() => navigate(`/about/${e.id}`)} />
+                  </div>
+                  <img
+                    style={{ height: '200px', objectFit: 'cover', margin: 'auto' }}
+                    src={`https://store-api.softclub.tj/images/${e.image}`}
+                  />
+                  <h1 className="card-title">{e.productName}</h1>
+                  <p className="card-price flex gap-2 items-center mt-1 justify-center">
+                    <span className="price-current text-red-600 font-bold">{e.price} {value}</span>
+                    <span className="price-old line-through text-gray-400">{e.discountPrice} {value}</span>
+                  </p>
+                  <p className="card-rating pb-2">★★★★☆ (4.5)</p>
+                  <button onClick={() => localStorage.getItem("token") ? addToCart(e.id) : messageApi.error("Log in first!")} className="card-btn">🛒 В корзину</button>
+                </div>
+              )
+            })}
+            
+          </div>
+          <Carousel
+          className="car"
+          style={{ width: "1200px", height: "454px", borderRadius:"8px", margin:"auto" }}
+          autoplay
+          infinite
+          dots
+          arrows
+          speed={800}
+        >
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src="../../public/image.png"
+              width="100%"
+              height="auto"
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
+          <div
+            style={{ display: "flex", width: "80%", justifyContent: "center" }}
+          >
+            <img
+              src="../../public/image.png"
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
+          <div style={{ display: "flex", justifyContent: "center" }}>
+            <img
+              src="../../public/image.png"
+              width="100%"
+              height="100%"
+              style={{
+                borderRadius: "12px",
+                objectFit: "cover",
+                width: "100%",
+                height: "100%",
+              }}
+            />
+          </div>
+        </Carousel>
+          <div className="carts">
+            {data?.data?.products?.slice(0, 4).map((e: Product) => {
+              const discountPercent = Math.round(((e.price - e.discountPrice) / e.price) * 100)
+              const wishlistIds = JSON.parse(localStorage.getItem("id") ?? "[]") as string[]
+              return (
+                <div className="card relative mt-5" key={e.id}>
+                  <div className="absolute bottom-87 left-40 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                    {discountPercent}%
+                  </div>
+                  <div className='absolute left-3'>
+                    {wishlistIds.includes(e.id) ? (
+                      <IoMdHeart onClick={() => removeFromWishlist(e.id)} size={30} />
+                    ) : (
+                      <IoIosHeartEmpty onClick={() => addToWish(e.id)} size={30} />
+                    )}
+                    <FaRegEye size={30} onClick={() => navigate(`/about/${e.id}`)} />
+                  </div>
+                  <img
+                    style={{ height: '200px', objectFit: 'cover', margin: 'auto' }}
+                    src={`https://store-api.softclub.tj/images/${e.image}`}
+                  />
+                  <h1 className="card-title">{e.productName}</h1>
+                  <p className="card-price flex gap-2 items-center mt-1 justify-center">
+                    <span className="price-current text-red-600 font-bold">{e.price} {value}</span>
+                    <span className="price-old line-through text-gray-400">{e.discountPrice} {value}</span>
+                  </p>
+                  <p className="card-rating pb-2">★★★★☆ (4.5)</p>
+                  <button onClick={() => localStorage.getItem("token") ? addToCart(e.id) : messageApi.error("Log in first!")} className="card-btn">🛒 В корзину</button>
+                </div>
+              )
+            })}
+            
           </div>
         </>
       )}

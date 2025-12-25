@@ -95,7 +95,7 @@ const Wishlist = () => {
         </div>
       ) : (
         data.map((e: any) => (
-          <div key={e.id} className="card">
+          <div key={e.id} className="card text-center rounded-2xl">
             <div className="product-image">
               <img
                 src={`https://store-api.softclub.tj/images/${e?.images[0]?.images}`}

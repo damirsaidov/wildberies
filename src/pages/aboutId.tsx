@@ -91,10 +91,17 @@ const AboutId = () => {
             </div>
             <button
               style={{ display: "flex", justifySelf: "center" }}
-              className=" w-28 bg-red-400 rounded-2xl text-white px-5 py-2"
+              className=" w-24 text-center bg-red-400 rounded-2xl text-white px-5 py-2"
               onClick={() => navigate(-1)}
             >
-              Go back
+              Назад
+            </button>
+            <button
+              style={{ display: "flex", justifySelf: "center" }}
+              className=" w-52 bg-blue-500 rounded-2xl text-white px-5 py-2"
+              onClick={() => navigate("/checkout")}
+            >
+              Перейти к покупке
             </button>
           </div>
         </div>

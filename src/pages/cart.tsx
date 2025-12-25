@@ -13,11 +13,8 @@ interface Product {
         image: string;
     }
 }
-interface CartData {
-    productsInCart: Product[];
-}
 const Cart = () => {
-    const [data, setData] = useState<CartData | null>(null)
+    const [data, setData] = useState<any>(null)
     const [messageApi, context] = useMessage()
     const navigate = useNavigate()
     const getCart = async () => {
@@ -31,7 +28,7 @@ const Cart = () => {
                 }
             );
             let data = await res.json()
-            setData({ productsInCart: data?.data[0]?.productsinCart || [] })
+            setData(data.data)
         } catch (error) {
             console.error(error);
         }
@@ -64,9 +61,9 @@ const Cart = () => {
         if (!wishlist.includes(id)) {
             wishlist.push(id);
             localStorage.setItem("id", JSON.stringify(wishlist));
-            messageApi.success("Added to wishlist");
+            messageApi.success("Добавлено в избранное");
         } else {
-            messageApi.info("This product is already in your wishlist");
+            messageApi.info("Этот продукт уже есть в ваших избранных");
         }
     }
     const addToCart = async (id: number) => {
@@ -80,12 +77,13 @@ const Cart = () => {
                     },
                 }
             );
-            messageApi.success("Added to cart");
+            messageApi.success("Добавлено в корзину");
         } catch (error) {
-            messageApi.error("Something went wrong.");
+            messageApi.error("Чтото пошло не так.");
             console.error(error);
         }
     };
+    console.log()
     async function deleteFromCart(id: number) {
         try {
             await fetch(`https://store-api.softclub.tj/Product/delete-product?id=${id}`, {
@@ -95,8 +93,10 @@ const Cart = () => {
                 },
             })
             getCart()
+            messageApi.success("Успешно удалено")
         } catch (error) {
             console.error(error);
+            messageApi.error("Чтото пошло не так")
         }
     }
     useEffect(() => {
@@ -109,15 +109,15 @@ const Cart = () => {
                 <thead>
                     <tr className="border-b">
                         <th className="p-3 text-left">Wishlist</th>
-                        <th className="p-3 text-left">Image</th>
-                        <th className="p-3 text-left">Product</th>
-                        <th className="p-3 text-left">Price</th>
-                        <th className="p-3 text-left">Rating</th>
-                        <th className="p-3 text-left">Actions</th>
+                        <th className="p-3 text-center">Image</th>
+                        <th className="p-3 text-center">Product</th>
+                        <th className="p-3 text-center">Price</th>
+                        <th className="p-3 text-center">Rating</th>
+                        <th className="p-3 text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {data?.productsInCart?.map((e: Product) => (
+                    {data ? data[0]?.productsInCart.map((e: Product) => (
                         <tr key={e.product.id} className="border-b text-center">
                             <td className="p-3">
                                 {localStorage.getItem("id")?.includes(String(e.product.id)) ? (
@@ -151,8 +151,8 @@ const Cart = () => {
                                     {e.product.discountPrice} $
                                 </span>
                             </td>
-                            <td className="p-3">★★★★☆ (4.5)</td>
-                            <td className="p-3 flex gap-3 justify-center">
+                            <td >★★★★☆ (4.5)</td>
+                            <td className="p-3 flex gap-3 justify-center items-center">
                                 <FaRegEye
                                     size={22}
                                     className="cursor-pointer"
@@ -172,7 +172,7 @@ const Cart = () => {
                                 </button>
                             </td>
                         </tr>
-                    ))}
+                    )) : ""}
                 </tbody>
             </table>
         </div>

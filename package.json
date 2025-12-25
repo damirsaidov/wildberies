@@ -14,6 +14,8 @@
     "@tailwindcss/vite": "^4.1.18",
     "antd": "^6.1.1",
     "axios": "^1.13.2",
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-icons": "^5.5.0",
@@ -33,5 +35,10 @@
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.30.1",
     "vite": "^6.3.5"
-  }
+  },
+  "description": "A modern and feature-rich **frontend web application inspired by Wildberries**, built to deliver a smooth, responsive, and user-friendly shopping experience.",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
 }

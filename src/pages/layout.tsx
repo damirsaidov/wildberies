@@ -104,8 +104,8 @@ const Layout = () => {
             <div className="drawr flex-1 mx-4">
               <div className="flex flex-col gap-2">
                 <div className="flex items-center justify-between">
-                  <h1 className='text-[16px] white'>Бренды</h1>
-                  <Switch checked={darkMode} onChange={setDarkMode} />
+                  <h1 className='text-[16px] white dns'>Бренды</h1>
+                  <Switch className='asd' checked={darkMode} onChange={setDarkMode} />
                 </div>
                 <input
                   type="text"
