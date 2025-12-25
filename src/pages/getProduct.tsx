@@ -1,11 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetProductsByCategQuery } from '../services/api'
+import Loader from '../components/loader'
 
 const GetProduct = () => {
   const { id } = useParams<{ id: string }>()
-  const { data } = useGetProductsByCategQuery(id ?? "")
+  const { data, isLoading } = useGetProductsByCategQuery(id ?? "")
   const navigate = useNavigate()
-
+  if (isLoading) return <Loader/>
   return (
     <div className='carts'>
       {data?.data?.products?.length ? (

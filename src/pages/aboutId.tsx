@@ -1,10 +1,12 @@
 import { Space } from 'antd'
 import { useNavigate, useParams } from 'react-router-dom'
 import { useGetProductsByIdQuery } from '../services/api'
+import Loader from '../components/loader'
 const AboutId = () => {
   const { id } = useParams<{ id: string }>()
   const navigate = useNavigate()
-  const { data } = useGetProductsByIdQuery(id ?? "", { skip: !id })
+  const { data, isLoading } = useGetProductsByIdQuery(id ?? "", { skip: !id })
+  if (isLoading) return <Loader/>
   return (
     <div className='mt-4'>
       <div className="mx">
