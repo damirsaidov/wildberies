@@ -81,7 +81,7 @@ const Products = () => {
   return (
     <div>
       {context}
-      <div className="flex items-start max-w-[1400px] justify-center gap-20">
+      <div className="flex items-start max-w-350 justify-center gap-20">
         <aside className="asid hidden md:block w-74 bg-white rounded-lg shadow p-4 mt-12">
           {categories.map((category: any) => (
             <Link

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { FormEvent } from "react";
 interface Order {
   name: string;
@@ -15,26 +15,6 @@ export default function Checkout() {
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState<any>(null);
-  useEffect(() => {
-    const getCart = async () => {
-      try {
-        let res = await fetch(
-          `https://store-api.softclub.tj/Cart/get-products-from-cart`,
-          {
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem("token")}`,
-            },
-          }
-        );
-        let data = await res.json();
-        setData(data.data);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-    getCart();
-  }, []);
   const submitOrder = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);

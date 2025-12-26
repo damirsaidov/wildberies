@@ -1,8 +1,7 @@
 import { useGetProductsQuery } from "../services/api";
 import Loader from "../components/loader";
 import Error from "../components/error";
-import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import useMessage from "antd/es/message/useMessage";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
@@ -20,7 +19,6 @@ const Home = () => {
   const [messageApi, context] = useMessage();
   const navigate = useNavigate();
 
-  const [value, setValue] = useState("₽");
   const { data, isLoading, error } = useGetProductsQuery();
   function addToWish(id: string) {
     const idx = localStorage.getItem("id");
@@ -189,10 +187,10 @@ const Home = () => {
                   <h1 className="card-title">{e.productName}</h1>
                   <p className="card-price flex gap-2 items-center mt-1 justify-center">
                     <span className="price-current text-red-600 font-bold">
-                      {e.price} {value}
+                      {e.price} $
                     </span>
                     <span className="price-old line-through text-gray-400">
-                      {e.discountPrice} {value}
+                      {e.discountPrice} $
                     </span>
                   </p>
                   <p className="card-rating pb-2">★★★★☆ (4.5)</p>
@@ -309,10 +307,10 @@ const Home = () => {
                   <h1 className="card-title">{e.productName}</h1>
                   <p className="card-price flex gap-2 items-center mt-1 justify-center">
                     <span className="price-current text-red-600 font-bold">
-                      {e.price} {value}
+                      {e.price} $
                     </span>
                     <span className="price-old line-through text-gray-400">
-                      {e.discountPrice} {value}
+                      {e.discountPrice} $
                     </span>
                   </p>
                   <p className="card-rating pb-2">★★★★☆ (4.5)</p>
@@ -429,10 +427,10 @@ const Home = () => {
                   <h1 className="card-title">{e.productName}</h1>
                   <p className="card-price flex gap-2 items-center mt-1 justify-center">
                     <span className="price-current text-red-600 font-bold">
-                      {e.price} {value}
+                      {e.price} $
                     </span>
                     <span className="price-old line-through text-gray-400">
-                      {e.discountPrice} {value}
+                      {e.discountPrice} $
                     </span>
                   </p>
                   <p className="card-rating pb-2">★★★★☆ (4.5)</p>
