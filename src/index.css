@@ -155,9 +155,13 @@ body {
 }
 
 .dark {
+  .asid{
+    background-color: #121217;
+  }
   background-color: var(--bg-dark);
   color: var(--text-dark);
-  height: 2100vh;
+  height: fit-content;
+  padding-bottom: 700px;
   input{
     background-color: black;
     border: 1px solid white;

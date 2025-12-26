@@ -8,26 +8,15 @@ interface Order {
   items: string;
   total: string;
 }
-
 export default function Checkout() {
   const BOT_TOKEN = "8108946436:AAF1GdOrWpyLa5eMYXFXFpiYfXwJQ9ugoWY";
-  const CHAT_ID = "5206404005";
+  const CHAT_ID = "-1003667396512";
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
   const [loading, setLoading] = useState<boolean>(false);
-  const [data, setData] = useState<any>(null)
-  const submitOrder = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    const order: Order = {
-      name,
-      phone,
-      address,
-      items: "e",
-      total: "e",
-    };
-    try { const response = await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, { chat_id: CHAT_ID, order, }); console.log("Telegram response:", response.data); } catch (error) { console.error("Telegram error:",  );  }
+  const [data, setData] = useState<any>(null);
+  useEffect(() => {
     const getCart = async () => {
       try {
         let res = await fetch(
@@ -38,15 +27,40 @@ export default function Checkout() {
             },
           }
         );
-        let data = await res.json()
-        setData(data.data)
+        let data = await res.json();
+        setData(data.data);
       } catch (error) {
         console.error(error);
       }
     };
-    useEffect(() => {
-      getCart()
-    }, [])
+    getCart();
+  }, []);
+  const submitOrder = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    const order: Order = {
+      name,
+      phone,
+      address,
+      items: "e", 
+      total: "e", 
+    };
+    const message = `
+Name: ${order.name}
+Phone: ${order.phone}
+Address: ${order.address}
+Items: ${order.items}
+Total: ${order.total}
+`;
+    try {
+      const response = await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+        chat_id: CHAT_ID,
+        text: message, 
+      });
+      console.log("Telegram response:", response.data);
+    } catch (error) {
+      console.error("Telegram error:", error);
+    }
     setLoading(false);
   };
   return (
