@@ -7,7 +7,7 @@ import { FaRegEye } from "react-icons/fa";
 import axios from "axios";
 import Loader from "../components/loader";
 const Products = () => {
-  const { data, isLoading, error } = useGetProductsQuery();
+  const { data, isLoading } = useGetProductsQuery();
   const [messageApi, context] = useMessage();
   const [categories, setCategories] = useState<any>([]);
   async function getCategory() {
