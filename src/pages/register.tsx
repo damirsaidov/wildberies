@@ -22,7 +22,7 @@ const Register = () => {
       }
       const data = await res.json();
       localStorage.setItem("token", data.data);
-      messageApi.success("Registered successfully.");
+      messageApi.success("Зарегистрирован успешно!");
       setTimeout(() => navigate("/login"), 2000);
     } catch (error) {
       console.error(error);
@@ -36,14 +36,15 @@ const Register = () => {
   return (
     <div>
       {context}
-      <div className=" mediaa flex flex-col w-150 self-center m-auto rounded-3xl mt-10 shadow-2xl border-gray-400 p-4 ">
+      <div className="lgin mediaa flex flex-col w-150 self-center m-auto rounded-3xl mt-10 shadow-2xl border-gray-400 p-4 ">
+        <h1 className="text-center text-2xl p-2">Регистрация</h1>
         <form onSubmit={handleLogin}>
           <Input value={name} onChange={(e) => setName(e.target.value)} style={{ padding: "10px", margin: "10px", width: "99%" }} className="w-full" placeholder="Имя" />
           <Input value={phoneNumber} onChange={(e) => setPhoneNumber(e.target.value)} style={{ padding: "10px", margin: "10px", width: "99%" }} className="w-full" placeholder="Номер телефона" />
           <Input value={email} onChange={(e) => setEmail(e.target.value)} style={{ padding: "10px", margin: "10px", width: "99%" }} className="w-full" placeholder="Почта" />
           <Input value={password} onChange={(e) => setPassword(e.target.value)} style={{ padding: "10px", margin: "10px", width: "99%" }} className="w-full" placeholder="Пароль" />
           <button type="submit" className="w-full card-btn text-center">Регистрация</button>
-          <h1 className="p-2">Already have an account? <span style={{ color: "orange", borderBottom: "1px solid orange" }} onClick={() => navigate("/login")}>Войти</span></h1>
+          <h1 className="p-2">Уже есть аккаунт? <span style={{ color: "orange", borderBottom: "1px solid orange" }} onClick={() => navigate("/login")}>Войти</span></h1>
         </form>
       </div>
     </div>

@@ -13,13 +13,14 @@ const GetProduct = () => {
         data.data.products.map((e: any) => {
           const discountPercent = Math.round(((e.price - e.discountPrice) / e.price) * 100)
           return (
-            <div className='card relative mt-5' key={e.id}>
+            <div className='card relative mt-5 p-8 px-12' key={e.id}>
               <div className="absolute bottom-87 left-40 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
                 {discountPercent}%
               </div>
               <img
                 style={{ height: "200px", objectFit: "cover", margin: "auto" }}
                 src={`https://store-api.softclub.tj/images/${e.image}`}
+                className='rounded'
               />
               <h1 className='card-title'>{e.productName}</h1>
               <div className="justify-center card-price flex gap-2 items-center mt-1">

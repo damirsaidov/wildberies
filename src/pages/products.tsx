@@ -94,7 +94,7 @@ const Products = () => {
               </h3>
               {category.subCategories.length > 0 && (
                 <p className="text-xs text-gray-500 mt-2">
-                  {category.subCategories.length} items
+                  {category.subCategories ? category.subCategories.length : "0"} продуктов 
                 </p>
               )}
             </Link>
@@ -132,6 +132,7 @@ const Products = () => {
                 </div>
                 <img
                   style={{
+                    borderRadius:"8px",
                     height: "200px",
                     objectFit: "cover",
                     margin: "auto",

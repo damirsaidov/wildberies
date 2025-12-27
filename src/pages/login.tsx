@@ -20,11 +20,11 @@ const Login = () => {
     const data = await res.json();
     localStorage.setItem("token", data.data);
     localStorage.setItem("name", name);
-    messageApi.success("Logged in successfully");
+    messageApi.success("Вход успешен");
     setTimeout(() => navigate("/"), 2000);
   } catch (error) {
     console.error(error);
-    messageApi.error("Invalid Password or User Name!");
+    messageApi.error("Неправильный пароль или имя!");
   }
 }
     const handleLogin = async(e:any) => {
@@ -34,7 +34,8 @@ const Login = () => {
   return (
     <div>
         {context}
-      <div className="mediaa flex flex-col w-150 self-center m-auto rounded-3xl mt-10 shadow-2xl border-gray-400 p-4 ">
+      <div className="lgin mediaa flex flex-col w-150 self-center m-auto rounded-3xl mt-10 shadow-2xl border-gray-400 p-4 ">
+        <h1 className="text-center text-2xl p-2">Войти</h1>
         <form onSubmit={handleLogin}>
         <Input value={name} onChange={(e) => setName(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" placeholder="Имя пользователя"/>
         <Input value={pass} onChange={(e) => setPass(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" type={"password"} placeholder="Пароль"/>

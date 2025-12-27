@@ -78,28 +78,28 @@ const Wishlist = () => {
           },
         }
       );
-      messageApi.success("Added to cart");
+      messageApi.success("Добавлено в корзину");
     } catch (error) {
-      messageApi.error("Something went wrong.");
+      messageApi.error("Чтото пошло не так.");
       console.error(error);
     }
   };
   const navigate = useNavigate()
   return (
-    <div className="flx" style={{ display: "flex", justifySelf: "center", gap: 12, padding: 12 }}>
+    <div className="flx items-center" style={{ display: "flex", justifySelf: "center", gap: 12, padding: 12 }}>
       {contextHolder}
       {data.length == 0 ? (
         <div className="m-auto">
-          <p className="text-4xl pt-20">Your wishlist is empty!</p>
-          <button className="wb-btn flex justify-self-center m-auto p-2 px-4 mt-4" onClick={() => navigate(-1)}>Go back</button>
+          <p className="text-4xl pt-20">Ваше избранное пустое!</p>
+          <button className="wb-btn flex justify-self-center m-auto p-2 px-4 mt-4" onClick={() => navigate(-1)}>Назад</button>
         </div>
       ) : (
         data.map((e: any) => (
-          <div key={e.id} className="card text-center rounded-2xl">
+          <div key={e.id} className="card text-center rounded-2xl p-4">
             <div className="product-image">
               <img
+              className="rounded"
                 src={`https://store-api.softclub.tj/images/${e?.images[0]?.images}`}
-                alt={e.productName}
               />
             </div>
             <div className="product-info">
@@ -112,10 +112,10 @@ const Wishlist = () => {
               </div>
               <Space>
                 <button className="bg-blue-600 text-white p-3 rounded-2xl" onClick={() => addToCart(e.id)}>
-                  + Add to cart
+                  + В корзину
                 </button>
                 <button className="bg-red-600 text-white p-3 rounded-2xl" onClick={() => removeFromWishlist(e.id)}>
-                  Delete
+                  Удалить
                 </button>
               </Space>
             </div>

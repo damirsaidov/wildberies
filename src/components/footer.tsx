@@ -2,9 +2,9 @@ import React from "react";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-800 text-white py-8 sticky bottom-0">
-      <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-start">
+      <div className="flexcolum max-w-7xl mx-auto px-4 flex flex-wrap justify-between items-start">
         <div className="flex flex-col gap-4 items-center">
-          <img src="../../logo.webp" className="h-12" />
+          <img src="../../logo.webp" className="h-12 rounded" />
           <p>Wildberries</p>
         </div>
         <div className="flex justify-center text-center">
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
           </ul>
         </div>
       </div>
-      <p className="text-center pt-6 pl-20">2025 Wildberries. All rights reserved.</p>
+      <p className="text-center nop pt-6 pl-20">2025 Wildberries. All rights reserved.</p>
     </footer>
   );
 };

@@ -1,37 +1,37 @@
-import { Space } from 'antd'
-import { useNavigate, useParams } from 'react-router-dom'
-import { useGetProductsByIdQuery } from '../services/api'
-import Loader from '../components/loader'
+import { Space } from "antd";
+import { useNavigate, useParams } from "react-router-dom";
+import { useGetProductsByIdQuery } from "../services/api";
+import Loader from "../components/loader";
 const AboutId = () => {
-  const { id } = useParams<{ id: string }>()
-  const navigate = useNavigate()
-  const { data, isLoading } = useGetProductsByIdQuery(id ?? "", { skip: !id })
-  if (isLoading) return <Loader/>
+  const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
+  const { data, isLoading } = useGetProductsByIdQuery(id ?? "", { skip: !id });
+  if (isLoading) return <Loader />;
   return (
-    <div className='mt-4'>
+    <div className="mt-4">
       <div className="mx">
         <div className="images">
           <Space orientation="vertical">
             <img
-              className="dns"
+              className="dns rounded"
               width="120px"
               height={"138px"}
               src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
             />
             <img
-              className="dns"
+              className="dns rounded"
               width="120px"
               height={"138px"}
               src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
             />
             <img
-              className="dns"
+              className="dns rounded"
               width="120px"
               height={"138px"}
               src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
             />
             <img
-              className="dns"
+              className="dns rounded"
               width="120px"
               height={"138px"}
               src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
@@ -41,6 +41,7 @@ const AboutId = () => {
             width={"500px"}
             style={{ objectFit: "cover" }}
             height={"600px"}
+            className="rounded"
             src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
           />
           <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
@@ -71,7 +72,7 @@ const AboutId = () => {
             >
               Цвет:
               <span
-                className='bordered'
+                className="bordered"
                 style={{
                   color: data?.data?.color,
                   background: data?.data?.color,
@@ -109,6 +110,6 @@ const AboutId = () => {
         </div>
       </div>
     </div>
-  )
-}
-export default AboutId
+  );
+};
+export default AboutId;

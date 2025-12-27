@@ -75,7 +75,7 @@ const Home = () => {
   return (
     <div>
       {isLoading && (
-        <div style={{ position: "relative", top: "250px" }}>
+        <div style={{ paddingTop:"20px" }}>
           <Loader />
         </div>
       )}
@@ -104,34 +104,19 @@ const Home = () => {
           >
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img
-                src="../../image.png"
+                src="../../сфкгыуд(2).jpeg"
                 width="100%"
-                height="auto"
+                height="100%"
                 style={{
                   borderRadius: "12px",
-                  objectFit: "cover",
+                  objectFit: "fill",
                   width: "100%",
                   height: "100%",
+                  overflow:"hidden"
                 }}
               />
             </div>
-            <div
-              style={{
-                display: "flex",
-                width: "80%",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="../../image.png"
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </div>
+           
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img
                 src="../../image.png"

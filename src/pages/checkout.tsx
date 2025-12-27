@@ -1,3 +1,4 @@
+import useMessage from "antd/es/message/useMessage";
 import axios from "axios";
 import { useState } from "react";
 import type { FormEvent } from "react";
@@ -11,6 +12,7 @@ interface Order {
 export default function Checkout() {
   const BOT_TOKEN = "8108946436:AAF1GdOrWpyLa5eMYXFXFpiYfXwJQ9ugoWY";
   const CHAT_ID = "-1003667396512";
+  const [messageApi, context] = useMessage();
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
   const [address, setAddress] = useState("");
@@ -22,8 +24,8 @@ export default function Checkout() {
       name,
       phone,
       address,
-      items: "e", 
-      total: "e", 
+      items: "Shoes",
+      total: "120$",
     };
     const message = `
 Name: ${order.name}
@@ -33,11 +35,14 @@ Items: ${order.items}
 Total: ${order.total}
 `;
     try {
-      const response = await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
         chat_id: CHAT_ID,
-        text: message, 
+        text: message,
       });
-      console.log("Telegram response:", response.data);
+      messageApi.info("Заявка была отправлена администраторам, ожидайте");
+      setAddress("");
+      setName("");
+      setPhone("");
     } catch (error) {
       console.error("Telegram error:", error);
     }
@@ -45,36 +50,38 @@ Total: ${order.total}
   };
   return (
     <form
-      className="flex flex-col mt-5 gap-4 w-full max-w-md mx-auto"
+      className="flex flex-col mt-5 gap-4 shadow-2xl p-6 rounded-2xl pt-8 w-full max-w-md mx-auto"
       onSubmit={submitOrder}
     >
+      {context}
+      <h1 className="text-center text-2xl">Оплата</h1>
       <input
-        className="p-4 rounded-2xl shadow-lg border border-gray-400"
-        placeholder="Name"
+        className="p-4 w-100  rounded-2xl shadow-lg border border-gray-400"
+        placeholder="Имя"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
       />
       <input
-        className="p-4 rounded-2xl shadow-lg border border-gray-400"
-        placeholder="Phone"
+        className="p-4 w-100 rounded-2xl shadow-lg border border-gray-400"
+        placeholder="Номер"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         required
       />
       <input
-        className="p-4 rounded-2xl shadow-lg border border-gray-400"
-        placeholder="Address"
+        className="p-4 w-100 rounded-2xl shadow-lg border border-gray-400"
+        placeholder="Адрес"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
         required
       />
       <button
-        className="p-4 rounded-2xl bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 disabled:opacity-50"
+        className="p-4 w-100 rounded-2xl bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 disabled:opacity-50"
         type="submit"
         disabled={loading}
       >
-        {loading ? "Sending..." : "Checkout"}
+        {loading ? "Отправляем..." : "Подтвердить"}
       </button>
     </form>
   );
