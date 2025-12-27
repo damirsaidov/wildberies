@@ -160,10 +160,10 @@ const Cart = () => {
           </div>
         </>
       ) : (
-        <h1 className="text-center text-4xl p-20">
+        <h1 className="text-center text-4xl p-20 flex flex-col items-center  gap-4">
           Ваша Корзина пуста! <br />
           <span
-            className="text-lg border-b-2 border-amber-300 p-4 bg-amber-600 rounded-2xl text-white cursor-pointer"
+            className="text-lg border-b-2 border-amber-300  p-4 bg-amber-600 rounded-2xl text-white cursor-pointer"
             onClick={() =>
               navigate(localStorage.getItem("token") ? "/products" : "/login")
             }

@@ -141,7 +141,7 @@ const Home = () => {
               ) as string[];
               return (
                 <div className="card relative mt-5" key={e.id}>
-                  <div className="absolute bottom-87 left-40 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  <div className="absolute bottom-87 left-48 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
                     {discountPercent}%
                   </div>
                   <div className="absolute left-3">
@@ -261,7 +261,7 @@ const Home = () => {
               ) as string[];
               return (
                 <div className="card relative mt-5" key={e.id}>
-                  <div className="absolute bottom-87 left-40 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  <div className="absolute bottom-87 left-48 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
                     {discountPercent}%
                   </div>
                   <div className="absolute left-3">
@@ -381,7 +381,7 @@ const Home = () => {
               ) as string[];
               return (
                 <div className="card relative mt-5" key={e.id}>
-                  <div className="absolute bottom-87 left-40 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                  <div className="absolute bottom-87 left-48 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
                     {discountPercent}%
                   </div>
                   <div className="absolute left-3">
