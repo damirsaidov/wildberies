@@ -1,13 +1,14 @@
 import { useGetProductsQuery } from "../services/api";
 import Loader from "../components/loader";
 import Error from "../components/error";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useMessage from "antd/es/message/useMessage";
 import { IoIosHeartEmpty } from "react-icons/io";
 import { IoMdHeart } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import axios from "axios";
 import { Carousel } from "antd";
+import { useEffect, useState } from "react";
 interface Product {
   id: string;
   productName: string;
@@ -18,7 +19,19 @@ interface Product {
 const Home = () => {
   const [messageApi, context] = useMessage();
   const navigate = useNavigate();
-
+const [categories, setCategories] = useState<any>([]);
+  async function getCategory() {
+    try {
+      const res = await fetch(
+        "https://store-api.softclub.tj/Category/get-categories"
+      );
+      const data = await res.json();
+      setCategories(data.data);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
   const { data, isLoading, error } = useGetProductsQuery();
   function addToWish(id: string) {
     const idx = localStorage.getItem("id");
@@ -72,27 +85,49 @@ const Home = () => {
       messageApi.error("Чтото пошло не так.");
     }
   };
+  useEffect(() => {
+    getCategory()
+  },[])
   return (
     <div>
       {isLoading && (
-        <div style={{ paddingTop:"20px" }}>
+        <div style={{ paddingTop: "20px" }}>
           <Loader />
         </div>
       )}
       {error && (
-        <div style={{ position: "relative", top: "250px" }}>
+        <div style={{ paddingTop: "20px" }}>
           <Error />
         </div>
       )}
-      {!isLoading && !error && (
+      {!isLoading && !error  && (
+      <div className="flex items-start max-w-375 justify-center gap-20">
+        <aside className="asid hidden md:block w-[400px] bg-white rounded-lg shadow p-4 mt-12">
+                  {categories.map((category: any) => (
+                    <Link
+                      key={category.id}
+                      to={`/categoryPage/${category.id}`}
+                      className="group block mb-4"
+                    >
+                      <h3 className="text-base vit font-semibold text-gray-800 line-clamp-2 group-hover:text-blue-600 transition">
+                        {category.categoryName}
+                      </h3>
+                      {category.subCategories.length > 0 && (
+                        <p className="text-xs text-gray-400 mt-2">
+                          {category.subCategories ? category.subCategories.length : "0"} продуктов 
+                        </p>
+                      )}
+                    </Link>
+                  ))}
+                </aside>
+        
         <div className="pt-6">
           {context}
-
           <Carousel
             className="car"
             style={{
-              width: "1200px",
-              height: "454px",
+              width: "1000px",
+              height: "374px",
               borderRadius: "8px",
               margin: "auto",
             }}
@@ -100,7 +135,7 @@ const Home = () => {
             infinite
             dots
             arrows
-            speed={800}
+            speed={900}
           >
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img
@@ -112,11 +147,11 @@ const Home = () => {
                   objectFit: "fill",
                   width: "100%",
                   height: "100%",
-                  overflow:"hidden"
+                  overflow: "hidden",
                 }}
               />
             </div>
-           
+
             <div style={{ display: "flex", justifyContent: "center" }}>
               <img
                 src="../../image.png"
@@ -193,64 +228,6 @@ const Home = () => {
               );
             })}
           </div>
-          <Carousel
-            className="car"
-            style={{
-              width: "1200px",
-              height: "454px",
-              borderRadius: "8px",
-              margin: "auto",
-            }}
-            autoplay
-            infinite
-            dots
-            arrows
-            speed={800}
-          >
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img
-                src="../../image.png"
-                width="100%"
-                height="auto"
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                width: "80%",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="../../image.png"
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img
-                src="../../image.png"
-                width="100%"
-                height="100%"
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </div>
-          </Carousel>
           <div className="carts">
             {data?.data?.products?.slice(0, 4).map((e: Product) => {
               const discountPercent = Math.round(
@@ -313,64 +290,6 @@ const Home = () => {
               );
             })}
           </div>
-          <Carousel
-            className="car"
-            style={{
-              width: "1200px",
-              height: "454px",
-              borderRadius: "8px",
-              margin: "auto",
-            }}
-            autoplay
-            infinite
-            dots
-            arrows
-            speed={800}
-          >
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img
-                src="../../image.png"
-                width="100%"
-                height="auto"
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </div>
-            <div
-              style={{
-                display: "flex",
-                width: "80%",
-                justifyContent: "center",
-              }}
-            >
-              <img
-                src="../../image.png"
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </div>
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img
-                src="../../image.png"
-                width="100%"
-                height="100%"
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
-            </div>
-          </Carousel>
           <div className="carts">
             {data?.data?.products?.slice(2, 6).map((e: Product) => {
               const discountPercent = Math.round(
@@ -433,6 +352,7 @@ const Home = () => {
               );
             })}
           </div>
+        </div>
         </div>
       )}
     </div>

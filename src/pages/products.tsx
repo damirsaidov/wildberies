@@ -89,11 +89,11 @@ const Products = () => {
               to={`/categoryPage/${category.id}`}
               className="group block mb-4"
             >
-              <h3 className="text-base font-semibold text-gray-800 line-clamp-2 group-hover:text-blue-600 transition">
+              <h3 className="text-base vit font-semibold text-gray-800 line-clamp-2 group-hover:text-blue-600 transition">
                 {category.categoryName}
               </h3>
               {category.subCategories.length > 0 && (
-                <p className="text-xs text-gray-500 mt-2">
+                <p className="text-xs text-gray-400 mt-2">
                   {category.subCategories ? category.subCategories.length : "0"} продуктов 
                 </p>
               )}

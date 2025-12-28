@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { FaUser, FaShoppingCart } from "react-icons/fa";
-import { Menu, Drawer, Button, Switch } from "antd";
+import { Menu, Drawer, Button } from "antd";
 import { MenuOutlined } from "@ant-design/icons";
 import { FaHeart } from "react-icons/fa";
 import Footer from "../components/footer";
-
+import Switch from "../components/switch";
 const Layout = () => {
   const [categ, setCateg] = useState([]);
   const [subcategory, setSubCategory] = useState([]);
   const [data, setData] = useState<any>(null);
-
   async function getCategory() {
     try {
       const res = await fetch(
@@ -22,7 +21,6 @@ const Layout = () => {
       console.error(error);
     }
   }
-
   async function getSubCategories(id: any) {
     try {
       const res = await fetch(
@@ -34,7 +32,6 @@ const Layout = () => {
       console.error(error);
     }
   }
-
   const getCart = async () => {
     try {
       const res = await fetch(
@@ -51,14 +48,12 @@ const Layout = () => {
       console.error(error);
     }
   };
-
   useEffect(() => {
     getCategory();
     setInterval(() => {
       getCart();
     }, 1000);
   }, []);
-
   const [visible, setVisible] = useState(false);
   const showDrawer = () => {
     setVisible(true);
@@ -66,10 +61,12 @@ const Layout = () => {
   const onClose = () => {
     setVisible(false);
   };
-
-  const [darkMode, setDarkMode] = useState(false);
+  const getInitialTheme = () => {
+    const saved = localStorage.getItem("theme");
+    return saved == "dark";
+  };
+  const [darkMode, setDarkMode] = useState<boolean>(getInitialTheme);
   const navigate = useNavigate();
-
   return (
     <div className={darkMode ? "dark" : "white"}>
       <div className="layout-container">
@@ -82,10 +79,9 @@ const Layout = () => {
               <div className="flex items-center gap-2">
                 <div className="flex flex-col items-center">
                   <img
-                    className="w-54 pt-2 rounded"
+                    className="w-38 h-24 pt-2 rounded object-contain"
                     onClick={() => navigate("/")}
-                    src="/logo.webp"
-                    alt=""
+                    src="../../image copy.png"
                   />
                 </div>
               </div>
@@ -119,7 +115,6 @@ const Layout = () => {
                           >
                             <img
                               src={`https://store-api.softclub.tj/images/${c.categoryImage}`}
-                              
                               style={{
                                 width: 40,
                                 objectFit: "contain",
@@ -205,7 +200,10 @@ const Layout = () => {
                     {data ? data[0]?.totalProducts : "0"}
                   </p>
                 </div>
-                  <Switch checked={darkMode} onChange={setDarkMode} />
+                <Switch
+                  checked={darkMode}
+                  onChange={(e: any) => setDarkMode(e.target.checked)}
+                />
               </div>
             </nav>
           </div>

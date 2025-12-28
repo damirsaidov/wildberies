@@ -10,19 +10,19 @@ const Footer: React.FC = () => {
         <div className="flex justify-center text-center">
           <ul className="space-y-2">
             <li>
-              <a className="hover:text-purple-400">About Us</a>
+              <a className="hover:text-purple-400">О нас</a>
             </li>
             <li>
-              <a className="hover:text-purple-400">Terms & Conditions</a>
+              <a className="hover:text-purple-400">Пользование соглашения</a>
             </li>
             <li>
-              <a className="hover:text-purple-400">Privacy Policy</a>
+              <a className="hover:text-purple-400">Приватность</a>
             </li>
             <li>
-              <a className="hover:text-purple-400">Help</a>
+              <a className="hover:text-purple-400">Помошь</a>
             <li>
             </li>
-              <a className="hover:text-purple-400">Contact</a>
+              <a className="hover:text-purple-400">Контакты</a>
             </li>
           </ul>
         </div>
@@ -67,7 +67,7 @@ const Footer: React.FC = () => {
           </ul>
         </div>
       </div>
-      <p className="text-center nop pt-6 pl-20">2025 Wildberries. All rights reserved.</p>
+      <p className="text-center nop pt-6 pl-20">2025 Wildberries. Все права зашишены.</p>
     </footer>
   );
 };

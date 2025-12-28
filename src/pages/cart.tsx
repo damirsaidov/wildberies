@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import { IoIosHeartEmpty, IoMdHeart } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import useMessage from "antd/es/message/useMessage";
-
 const Cart = () => {
   const [data, setData] = useState<any>(null);
   const [messageApi, context] = useMessage();
@@ -87,8 +86,8 @@ const Cart = () => {
     <div className="container mx-auto px-5 py-8">
       {context}
       {data && data[0]?.productsInCart.length > 0 ? (
-        <>
-          <table className="w-full rounded-2xl border-collapse mt-5 table-auto bg-white shadow-lg">
+        <div id="table">
+          <table  className="w-full rounded-2xl border-collapse mt-5 table-auto bg-white shadow-lg">
             <thead className="thad">
               <tr className="bg-gray-100 text-gray-700">
                 <th className="p-4 text-left">Избранное</th>
@@ -158,7 +157,7 @@ const Cart = () => {
               Оплатить
             </button>
           </div>
-        </>
+        </div>
       ) : (
         <h1 className="text-center text-4xl p-20 flex flex-col items-center  gap-4">
           Ваша Корзина пуста! <br />
@@ -177,5 +176,4 @@ const Cart = () => {
     </div>
   );
 };
-
 export default Cart;

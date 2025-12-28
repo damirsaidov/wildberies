@@ -176,22 +176,22 @@ body {
 }
 
 .dark {
+  .vit{
+    color: white;
+  }
   .asid {
     background-color: #121217;
   }
-  table{
-    background-color: black!important;
-    
+  table {
+    background-color: black !important;
   }
-  th{
+  th {
     border-bottom: 1px solid white;
-    background-color: black!important;
-      
-    }
+    background-color: black !important;
+  }
   background-color: var(--bg-dark);
   color: var(--text-dark);
   height: fit-content;
-  padding-bottom: 700px;
   input {
     background-color: black;
     border: 1px solid white;
@@ -257,7 +257,7 @@ body {
 .card,
 .product-card {
   width: 100%;
-  max-width: 280px;
+  max-width: 300px;
   flex: 1 1 calc(25% - 24px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -296,9 +296,9 @@ body {
       flex-direction: column;
     }
   }
-.car{
-  display: none!important;
-}
+  .car {
+    display: none !important;
+  }
   .images {
     flex-direction: column;
     align-items: center;
@@ -351,17 +351,24 @@ body {
       margin: 0 !important;
     }
   }
-  .carts{
+  .carts {
     flex-direction: column;
-    justify-content: center!important;
+    justify-content: center !important;
     padding: 0;
     margin: 0;
   }
-  .navbar{
+  .navbar {
     height: 550px;
   }
+
   footer {
     margin-top: 30px;
+  }
+  ul{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
   }
   .content {
     padding-top: 20px;
@@ -377,6 +384,9 @@ body {
 
   .ant-menu {
     width: 50% !important;
+  }
+  table {
+    display: none;
   }
 }
 
