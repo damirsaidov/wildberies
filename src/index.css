@@ -11,7 +11,7 @@
 *::after {
   box-sizing: border-box;
 }
-*{
+* {
   font-family: "bootstrap-icons";
 }
 :root {
@@ -309,6 +309,9 @@ body {
     text-align: center;
   }
   .nav-wb {
+    padding-bottom: 20px !important;
+  }
+  .nav-wb {
     height: 560px;
     padding-bottom: 20px !important;
     * {
@@ -377,11 +380,26 @@ body {
     margin: 0;
   }
   .navbar {
-    height: 550px;
+    height: 580px;
+    input {
+      width: 300px;
+      padding: 22px;
+    }
   }
 
   footer {
     margin-top: 30px;
+    *{
+      text-align: center!important;
+    }
+    div {
+      flex-direction: column;
+      gap: 20px;
+      
+    }
+    .num2{
+      align-items: center;
+    }
   }
   ul {
     display: flex;
