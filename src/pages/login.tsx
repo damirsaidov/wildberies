@@ -9,7 +9,7 @@ const Login = () => {
     const [messageApi, context] = useMessage()
     async function login() {
   try {
-    const res = await fetch("https://store-api.softclub.tj/Account/login", {
+    const res = await fetch("http://37.27.29.18:8002/Account/login", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ userName: name, password: pass }),
@@ -40,7 +40,7 @@ const Login = () => {
         <Input value={name} onChange={(e) => setName(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" placeholder="Имя пользователя"/>
         <Input value={pass} onChange={(e) => setPass(e.target.value)} style={{padding:"10px", margin:"10px", width:"99%"}} className="w-full" type={"password"} placeholder="Пароль"/>
           <button type="submit" className="w-full card-btn text-center">Войти</button>
-          <h1 className="p-2">Нету аккаунта? <span style={{color:"orange", borderBottom:"1px solid orange"}} onClick={() => navigate("/register")}>Регистрация</span></h1>
+          <h1 className="p-2">Нету аккаунта? <span style={{color:"orange", borderBottom:"1px solid orange"}} className="cursor-pointer" onClick={() => navigate("/register")}>Регистрация</span></h1>
         </form>
       </div>
     </div>

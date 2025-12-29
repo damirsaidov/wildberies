@@ -10,7 +10,7 @@ interface Order {
   total: string;
 }
 export default function Checkout() {
-  const BOT_TOKEN = "8108946436:AAF1GdOrWpyLa5eMYXFXFpiYfXwJQ9ugoWY";
+  const token = "8108946436:AAF1GdOrWpyLa5eMYXFXFpiYfXwJQ9ugoWY";
   const CHAT_ID = "-1003667396512";
   const [messageApi, context] = useMessage();
   const [name, setName] = useState("");
@@ -35,7 +35,7 @@ Items: ${order.items}
 Total: ${order.total}
 `;
     try {
-      await axios.post(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+      await axios.post(`https://api.telegram.org/bot${token}/sendMessage`, {
         chat_id: CHAT_ID,
         text: message,
       });

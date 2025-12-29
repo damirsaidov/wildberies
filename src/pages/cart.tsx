@@ -159,10 +159,12 @@ const Cart = () => {
           </div>
         </div>
       ) : (
-        <h1 className="text-center text-4xl p-20 flex flex-col items-center  gap-4">
+        <>
+        <img className="max-w-3xs m-auto" src="../../cartlogo.png" alt="" />
+        <h1 className="text-center textak text-4xl p-20 flex flex-col items-center  gap-4">
           Ваша Корзина пуста! <br />
           <span
-            className="text-lg border-b-2 border-amber-300  p-4 bg-amber-600 rounded-2xl text-white cursor-pointer"
+            className="text-2xl border-b-2 wb-btn p-4 px-8  bg-amber-600 rounded-2xl cursor-pointer"
             onClick={() =>
               navigate(localStorage.getItem("token") ? "/products" : "/login")
             }
@@ -172,6 +174,7 @@ const Cart = () => {
               : "Зарегистрируйтесь для добавление продуктов"}
           </span>
         </h1>
+      </>
       )}
     </div>
   );

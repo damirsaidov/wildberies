@@ -68,7 +68,7 @@ const Layout = () => {
   const [darkMode, setDarkMode] = useState<boolean>(getInitialTheme);
   const navigate = useNavigate();
   return (
-    <div className={darkMode ? "dark" : "white"}>
+    <div className={darkMode ? "white" : "dark"}>
       <div className="layout-container">
         <div className="navbar">
           <div
@@ -79,7 +79,7 @@ const Layout = () => {
               <div className="flex items-center gap-2">
                 <div className="flex flex-col items-center">
                   <img
-                    className="w-38 h-24 pt-2 rounded object-contain"
+                    className="w-42 h-26 pt-4 rounded object-contain cursor-pointer"
                     onClick={() => navigate("/")}
                     src="../../image copy.png"
                   />
@@ -149,7 +149,7 @@ const Layout = () => {
                   className="w-full px-6 py-4.25 rounded-xl bg-white text-black focus:outline-none"
                 />
               </div>
-              <div className="flex items-center gap-6 text-white pt-7">
+              <div className="cursor-pointer flex items-center gap-6 text-white pt-7">
                 <div
                   onClick={() => navigate(`/wishlist`)}
                   className="flex flex-col items-center"
@@ -157,7 +157,7 @@ const Layout = () => {
                   <FaHeart size={20} />
                   <p className="text-[#A0A0A0]">Избранное</p>
                 </div>
-                <div className="flex flex-col items-center">
+                <div className="cursor-pointer flex flex-col items-center">
                   {localStorage.getItem("token") ? (
                     <>
                       <FaUser
@@ -188,7 +188,7 @@ const Layout = () => {
                     </>
                   )}
                 </div>
-                <div className=" relative top-3 flex flex-col items-center">
+                <div className="cursor-pointer relative top-3 flex flex-col items-center">
                   <FaShoppingCart onClick={() => navigate("cart")} size={20} />
                   <p
                     onClick={() => navigate("cart")}
@@ -201,6 +201,7 @@ const Layout = () => {
                   </p>
                 </div>
                 <Switch
+                 style={{paddingBottom:"20px"}}
                   checked={darkMode}
                   onChange={(e: any) => setDarkMode(e.target.checked)}
                 />

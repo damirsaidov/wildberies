@@ -44,7 +44,7 @@ const Register = () => {
           <Input value={email} onChange={(e) => setEmail(e.target.value)} style={{ padding: "10px", margin: "10px", width: "99%" }} className="w-full" placeholder="Почта" />
           <Input value={password} onChange={(e) => setPassword(e.target.value)} style={{ padding: "10px", margin: "10px", width: "99%" }} className="w-full" placeholder="Пароль" />
           <button type="submit" className="w-full card-btn text-center">Регистрация</button>
-          <h1 className="p-2">Уже есть аккаунт? <span style={{ color: "orange", borderBottom: "1px solid orange" }} onClick={() => navigate("/login")}>Войти</span></h1>
+          <h1 className="p-2">Уже есть аккаунт? <span style={{ color: "orange", borderBottom: "1px solid orange" }} className="cursor-pointer" onClick={() => navigate("/login")}>Войти</span></h1>
         </form>
       </div>
     </div>

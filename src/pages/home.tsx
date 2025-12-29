@@ -19,7 +19,7 @@ interface Product {
 const Home = () => {
   const [messageApi, context] = useMessage();
   const navigate = useNavigate();
-const [categories, setCategories] = useState<any>([]);
+  const [categories, setCategories] = useState<any>([]);
   async function getCategory() {
     try {
       const res = await fetch(
@@ -31,7 +31,7 @@ const [categories, setCategories] = useState<any>([]);
       console.error(error);
     }
   }
-  
+
   const { data, isLoading, error } = useGetProductsQuery();
   function addToWish(id: string) {
     const idx = localStorage.getItem("id");
@@ -86,8 +86,8 @@ const [categories, setCategories] = useState<any>([]);
     }
   };
   useEffect(() => {
-    getCategory()
-  },[])
+    getCategory();
+  }, []);
   return (
     <div>
       {isLoading && (
@@ -100,259 +100,201 @@ const [categories, setCategories] = useState<any>([]);
           <Error />
         </div>
       )}
-      {!isLoading && !error  && (
-      <div className="flex items-start max-w-375 justify-center gap-20">
-        <aside className="asid hidden md:block w-[400px] bg-white rounded-lg shadow p-4 mt-12">
-                  {categories.map((category: any) => (
-                    <Link
-                      key={category.id}
-                      to={`/categoryPage/${category.id}`}
-                      className="group block mb-4"
-                    >
-                      <h3 className="text-base vit font-semibold text-gray-800 line-clamp-2 group-hover:text-blue-600 transition">
-                        {category.categoryName}
-                      </h3>
-                      {category.subCategories.length > 0 && (
-                        <p className="text-xs text-gray-400 mt-2">
-                          {category.subCategories ? category.subCategories.length : "0"} продуктов 
-                        </p>
-                      )}
-                    </Link>
-                  ))}
-                </aside>
-        
-        <div className="pt-6">
-          {context}
-          <Carousel
-            className="car"
-            style={{
-              width: "1000px",
-              height: "374px",
-              borderRadius: "8px",
-              margin: "auto",
-            }}
-            autoplay
-            infinite
-            dots
-            arrows
-            speed={900}
-          >
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img
-                src="../../сфкгыуд(2).jpeg"
-                width="100%"
-                height="100%"
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "fill",
-                  width: "100%",
-                  height: "100%",
-                  overflow: "hidden",
-                }}
-              />
-            </div>
+      {!isLoading && !error && (
+        <div className="flex items-start max-w-375 justify-center gap-20">
+          <aside className="asid hidden md:block w-100 bg-white rounded-lg shadow p-4 mt-12">
+            {categories.map((category: any) => (
+              <Link
+                key={category.id}
+                to={`/subCategories/${category.id}`}
+                className="group block mb-4"
+              >
+                <h3 className="text-base vit font-semibold text-gray-800 line-clamp-2 group-hover:text-blue-600 transition">
+                  {category.categoryName}
+                </h3>
+                {category.subCategories.length > 0 && (
+                  <p className="text-xs text-gray-400 mt-2">
+                    {category.subCategories
+                      ? category.subCategories.length
+                      : "0"}{' '}
+                    продуктов
+                  </p>
+                )}
+              </Link>
+            ))}
+          </aside>
 
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <img
-                src="../../image.png"
-                width="100%"
-                height="100%"
-                style={{
-                  borderRadius: "12px",
-                  objectFit: "cover",
-                  width: "100%",
-                  height: "100%",
-                }}
-              />
+          <div className="pt-6">
+            {context}
+            <Carousel
+              className="car"
+              style={{
+                width: "1000px",
+                height: "374px",
+                borderRadius: "8px",
+                margin: "auto",
+              }}
+              autoplay
+              infinite
+              dots
+              arrows
+              speed={900}
+            >
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img
+                  src="../../сфкгыуд(2).jpeg"
+                  width="100%"
+                  height="100%"
+                  style={{
+                    borderRadius: "12px",
+                    objectFit: "fill",
+                    width: "100%",
+                    height: "100%",
+                    overflow: "hidden",
+                  }}
+                />
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <img
+                  src="../../image.png"
+                  width="100%"
+                  height="100%"
+                  style={{
+                    borderRadius: "12px",
+                    objectFit: "cover",
+                    width: "100%",
+                    height: "100%",
+                  }}
+                />
+              </div>
+            </Carousel>
+            <div className="carts">
+              {data?.data?.products?.slice(2, 6).map((e: Product) => {
+                const discountPercent = Math.round(
+                  ((e.price - e.discountPrice) / e.price) * 100
+                );
+                const wishlistIds = JSON.parse(
+                  localStorage.getItem("id") ?? "[]"
+                ) as string[];
+                return (
+                  <div className="card relative mt-5" key={e.id}>
+                    <div className="absolute bottom-87 left-41 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                      {discountPercent}%
+                    </div>
+                    <div className="absolute left-1">
+                      {wishlistIds.includes(e.id) ? (
+                        <IoMdHeart
+                          onClick={() => removeFromWishlist(e.id)}
+                          size={30}
+                        />
+                      ) : (
+                        <IoIosHeartEmpty
+                          onClick={() => addToWish(e.id)}
+                          size={30}
+                        />
+                      )}
+                      <FaRegEye
+                        size={30}
+                        onClick={() => navigate(`/about/${e.id}`)}
+                      />
+                    </div>
+                    <img
+                      style={{
+                        height: "200px",
+                        objectFit: "cover",
+                        margin: "auto",
+                      }}
+                      src={`https://store-api.softclub.tj/images/${e.image}`}
+                    />
+                    <h1 className="card-title">{e.productName}</h1>
+                    <p className="card-price flex gap-2 items-center mt-1 justify-center">
+                      <span className="price-current text-red-600 font-bold">
+                        {e.price} $
+                      </span>
+                      <span className="price-old line-through text-gray-400">
+                        {e.discountPrice} $
+                      </span>
+                    </p>
+                    <p className="card-rating pb-2">★★★★☆ (4.5)</p>
+                    <button
+                      onClick={() =>
+                        localStorage.getItem("token")
+                          ? addToCart(e.id)
+                          : messageApi.error("Сначала зарегистрируйтесь!")
+                      }
+                      className="card-btn"
+                    >
+                      🛒 В корзину
+                    </button>
+                  </div>
+                );
+              })}
             </div>
-          </Carousel>
-          <div className="carts">
-            {data?.data?.products?.slice(0, 4).map((e: Product) => {
-              const discountPercent = Math.round(
-                ((e.price - e.discountPrice) / e.price) * 100
-              );
-              const wishlistIds = JSON.parse(
-                localStorage.getItem("id") ?? "[]"
-              ) as string[];
-              return (
-                <div className="card relative mt-5" key={e.id}>
-                  <div className="absolute bottom-87 left-48 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    {discountPercent}%
-                  </div>
-                  <div className="absolute left-3">
-                    {wishlistIds.includes(e.id) ? (
-                      <IoMdHeart
-                        onClick={() => removeFromWishlist(e.id)}
+            <div className="carts">
+              {data?.data?.products?.slice(0, 4).map((e: Product) => {
+                const discountPercent = Math.round(
+                  ((e.price - e.discountPrice) / e.price) * 100
+                );
+                const wishlistIds = JSON.parse(
+                  localStorage.getItem("id") ?? "[]"
+                ) as string[];
+                return (
+                  <div className="card relative mt-5" key={e.id}>
+                    <div className="absolute bottom-87 left-41 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                      {discountPercent}%
+                    </div>
+                    <div className="absolute left-3">
+                      {wishlistIds.includes(e.id) ? (
+                        <IoMdHeart
+                          onClick={() => removeFromWishlist(e.id)}
+                          size={30}
+                        />
+                      ) : (
+                        <IoIosHeartEmpty
+                          onClick={() => addToWish(e.id)}
+                          size={30}
+                        />
+                      )}
+                      <FaRegEye
                         size={30}
+                        onClick={() => navigate(`/about/${e.id}`)}
                       />
-                    ) : (
-                      <IoIosHeartEmpty
-                        onClick={() => addToWish(e.id)}
-                        size={30}
-                      />
-                    )}
-                    <FaRegEye
-                      size={30}
-                      onClick={() => navigate(`/about/${e.id}`)}
+                    </div>
+                    <img
+                      style={{
+                        height: "200px",
+                        objectFit: "cover",
+                        margin: "auto",
+                      }}
+                      src={`https://store-api.softclub.tj/images/${e.image}`}
                     />
+                    <h1 className="card-title">{e.productName}</h1>
+                    <p className="card-price flex gap-2 items-center mt-1 justify-center">
+                      <span className="price-current text-red-600 font-bold">
+                        {e.price} $
+                      </span>
+                      <span className="price-old line-through text-gray-400">
+                        {e.discountPrice} $
+                      </span>
+                    </p>
+                    <p className="card-rating pb-2">★★★★☆ (4.5)</p>
+                    <button
+                      onClick={() =>
+                        localStorage.getItem("token")
+                          ? addToCart(e.id)
+                          : messageApi.error("Log in first!")
+                      }
+                      className="card-btn"
+                    >
+                      🛒 В корзину
+                    </button>
                   </div>
-                  <img
-                    style={{
-                      height: "200px",
-                      objectFit: "cover",
-                      margin: "auto",
-                    }}
-                    src={`https://store-api.softclub.tj/images/${e.image}`}
-                  />
-                  <h1 className="card-title">{e.productName}</h1>
-                  <p className="card-price flex gap-2 items-center mt-1 justify-center">
-                    <span className="price-current text-red-600 font-bold">
-                      {e.price} $
-                    </span>
-                    <span className="price-old line-through text-gray-400">
-                      {e.discountPrice} $
-                    </span>
-                  </p>
-                  <p className="card-rating pb-2">★★★★☆ (4.5)</p>
-                  <button
-                    onClick={() =>
-                      localStorage.getItem("token")
-                        ? addToCart(e.id)
-                        : messageApi.error("Сначала зарегистрируйтесь!")
-                    }
-                    className="card-btn"
-                  >
-                    🛒 В корзину
-                  </button>
-                </div>
-              );
-            })}
+                );
+              })}
+            </div>
+            
           </div>
-          <div className="carts">
-            {data?.data?.products?.slice(0, 4).map((e: Product) => {
-              const discountPercent = Math.round(
-                ((e.price - e.discountPrice) / e.price) * 100
-              );
-              const wishlistIds = JSON.parse(
-                localStorage.getItem("id") ?? "[]"
-              ) as string[];
-              return (
-                <div className="card relative mt-5" key={e.id}>
-                  <div className="absolute bottom-87 left-48 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    {discountPercent}%
-                  </div>
-                  <div className="absolute left-3">
-                    {wishlistIds.includes(e.id) ? (
-                      <IoMdHeart
-                        onClick={() => removeFromWishlist(e.id)}
-                        size={30}
-                      />
-                    ) : (
-                      <IoIosHeartEmpty
-                        onClick={() => addToWish(e.id)}
-                        size={30}
-                      />
-                    )}
-                    <FaRegEye
-                      size={30}
-                      onClick={() => navigate(`/about/${e.id}`)}
-                    />
-                  </div>
-                  <img
-                    style={{
-                      height: "200px",
-                      objectFit: "cover",
-                      margin: "auto",
-                    }}
-                    src={`https://store-api.softclub.tj/images/${e.image}`}
-                  />
-                  <h1 className="card-title">{e.productName}</h1>
-                  <p className="card-price flex gap-2 items-center mt-1 justify-center">
-                    <span className="price-current text-red-600 font-bold">
-                      {e.price} $
-                    </span>
-                    <span className="price-old line-through text-gray-400">
-                      {e.discountPrice} $
-                    </span>
-                  </p>
-                  <p className="card-rating pb-2">★★★★☆ (4.5)</p>
-                  <button
-                    onClick={() =>
-                      localStorage.getItem("token")
-                        ? addToCart(e.id)
-                        : messageApi.error("Log in first!")
-                    }
-                    className="card-btn"
-                  >
-                    🛒 В корзину
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-          <div className="carts">
-            {data?.data?.products?.slice(2, 6).map((e: Product) => {
-              const discountPercent = Math.round(
-                ((e.price - e.discountPrice) / e.price) * 100
-              );
-              const wishlistIds = JSON.parse(
-                localStorage.getItem("id") ?? "[]"
-              ) as string[];
-              return (
-                <div className="card relative mt-5" key={e.id}>
-                  <div className="absolute bottom-87 left-48 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
-                    {discountPercent}%
-                  </div>
-                  <div className="absolute left-3">
-                    {wishlistIds.includes(e.id) ? (
-                      <IoMdHeart
-                        onClick={() => removeFromWishlist(e.id)}
-                        size={30}
-                      />
-                    ) : (
-                      <IoIosHeartEmpty
-                        onClick={() => addToWish(e.id)}
-                        size={30}
-                      />
-                    )}
-                    <FaRegEye
-                      size={30}
-                      onClick={() => navigate(`/about/${e.id}`)}
-                    />
-                  </div>
-                  <img
-                    style={{
-                      height: "200px",
-                      objectFit: "cover",
-                      margin: "auto",
-                    }}
-                    src={`https://store-api.softclub.tj/images/${e.image}`}
-                  />
-                  <h1 className="card-title">{e.productName}</h1>
-                  <p className="card-price flex gap-2 items-center mt-1 justify-center">
-                    <span className="price-current text-red-600 font-bold">
-                      {e.price} $
-                    </span>
-                    <span className="price-old line-through text-gray-400">
-                      {e.discountPrice} $
-                    </span>
-                  </p>
-                  <p className="card-rating pb-2">★★★★☆ (4.5)</p>
-                  <button
-                    onClick={() =>
-                      localStorage.getItem("token")
-                        ? addToCart(e.id)
-                        : messageApi.error("Log in first!")
-                    }
-                    className="card-btn"
-                  >
-                    🛒 В корзину
-                  </button>
-                </div>
-              );
-            })}
-          </div>
-        </div>
         </div>
       )}
     </div>

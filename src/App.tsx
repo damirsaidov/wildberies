@@ -11,6 +11,7 @@ import Cart from "./pages/cart";
 import Profile from "./pages/profile";
 import Checkout from "./pages/checkout";
 import Products from "./pages/products";
+import SubCategories from "./pages/subCategories";
 export const router = createBrowserRouter([
   {
     path: "/",
@@ -31,6 +32,10 @@ export const router = createBrowserRouter([
       {
         path: "products/:id",
         element: <GetProduct />
+      },
+      {
+        path: "subCategories/:id",
+        element: <SubCategories />
       },
       {
         path: "about/:id",

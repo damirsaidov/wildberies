@@ -8,7 +8,12 @@ const AboutId = () => {
   const { data, isLoading } = useGetProductsByIdQuery(id ?? "", { skip: !id });
   if (isLoading) return <Loader />;
   return (
-    <div className="mt-4">
+    <div className="mt-4 p-6 pb-12">
+      <h1 className="flex items-center p-2 text-xl gap-2">
+        <span onClick={() => navigate("/")}>Главная</span> {">"}
+        <span onClick={() => navigate("/products")}>Продукты</span> {">"}
+        <span>{data?.data?.productName}</span>
+      </h1>
       <div className="mx">
         <div className="images">
           <Space orientation="vertical">

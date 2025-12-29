@@ -1,9 +1,19 @@
+@font-face {
+  font-display: fallback;
+  font-family: "bootstrap-icons";
+  src: url("../bootstrap-icons.woff2?1bb88866b4085542c8ed5fb61b9393dd")
+      format("woff2"),
+    url("../bootstrap-icons.woff?1bb88866b4085542c8ed5fb61b9393dd")
+      format("woff");
+}
 *,
 *::before,
 *::after {
   box-sizing: border-box;
 }
-
+*{
+  font-family: "bootstrap-icons";
+}
 :root {
   --bg-light: #f6f6f6;
   --bg-dark: #0e0e11;
@@ -61,7 +71,7 @@ body {
   top: 0;
   z-index: 100;
   padding: 14px 0;
-  background: linear-gradient(90deg, #7b1fa2, #5b0d88);
+  background: linear-gradient(90deg, #be7adb, #8c2fc2);
 }
 
 .carts,
@@ -176,7 +186,7 @@ body {
 }
 
 .dark {
-  .vit{
+  .vit {
     color: white;
   }
   .asid {
@@ -236,18 +246,15 @@ body {
 .dark .card-price {
   color: var(--danger);
 }
-
 .dark .card-btn,
 .dark .wb-btn {
   background: linear-gradient(90deg, var(--accent), var(--accent-dark));
 }
-
 .dark .ant-btn {
   background-color: transparent;
   border: 1px solid rgba(255, 255, 255, 0.2);
   color: var(--text-dark);
 }
-
 .dark .ant-input,
 .dark .ant-select {
   background-color: #121217;
@@ -284,14 +291,26 @@ body {
     flex: 1 1 100%;
   }
 }
-
 @media (max-width: 520px) {
   .navbar {
     position: relative;
-    height: 500px;
   }
-
+  .textak {
+    padding: 0;
+  }
+  .Swo {
+    padding: 20px;
+  }
+  .lgin {
+    width: 90%;
+    box-shadow: 0 0 3px 0;
+  }
+  h1 {
+    text-align: center;
+  }
   .nav-wb {
+    height: 560px;
+    padding-bottom: 20px !important;
     * {
       flex-direction: column;
     }
@@ -303,10 +322,10 @@ body {
     flex-direction: column;
     align-items: center;
   }
-
   .card,
   .product-card {
     width: 90%;
+    margin: auto;
   }
   form {
     width: 90% !important;
@@ -364,7 +383,7 @@ body {
   footer {
     margin-top: 30px;
   }
-  ul{
+  ul {
     display: flex;
     flex-direction: column;
     gap: 10px;
