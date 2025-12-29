@@ -21,13 +21,19 @@ const SubCategories = () => {
   }, []);
   return (
     <div>
-    <button className="bg-purple-500 rounded-2xl border-0 text-white  px-4 py-2 mt-2 w-32" onClick={() => navigate(-1)}>{"<   "} Go back</button>
+      <button
+        className="bg-purple-500 rounded-2xl border-0 text-white  px-4 py-2 mt-2 w-32"
+        onClick={() => navigate(-1)}
+      >
+        {"<   "} Go back
+      </button>
       <div className="carts">
         {subcategory?.map((e: any) => (
-          <div className="cursor-pointer shadow-2xl w-55 h-40 p-10 text-center flex flex-col  rounded-2xl">
-          <h1 onClick={() => navigate(`/products/${e.id}`)}>
-            {e.subCategoryName}
-          </h1>
+          <div
+            onClick={() => navigate(`/products/${e.id}`)}
+            className="cursor-pointer shadow-2xl w-55 h-40 p-10 text-center flex flex-col  rounded-2xl"
+          >
+            <h1>{e.subCategoryName}</h1>
           </div>
         ))}
       </div>

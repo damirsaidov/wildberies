@@ -6,20 +6,6 @@ const GetProduct = () => {
   const { id } = useParams<{ id: string }>(); 
   const { data, isLoading, error } = useGetProductsByCategQuery(id ?? "");  
   const navigate = useNavigate();  
-  if (isLoading) return <Loader />;  
-  if (error) {
-    return (
-      <div className="error-container">
-        <h1 className="text-red-600">Error fetching data. Try again later.</h1>
-        <button
-          className="wb-btn w-62.5 p-5 text-center m-auto"
-          onClick={() => navigate("/")}
-        >
-          Go back to Home
-        </button>
-      </div>
-    );
-  }
   const [categories, setCategories] = useState<any[]>([]);
   async function getCategory() {
     try {
@@ -28,15 +14,29 @@ const GetProduct = () => {
       if (data && data.data) {
         setCategories(data.data);
       } else {
-        console.error("Invalid response structure:", data);
+        console.error(data);
       }
     } catch (error) {
-      console.error("Error fetching categories:", error);
+      console.error(error);
     }
   }
   useEffect(() => {
     getCategory();
   }, []);
+  if (isLoading) return <Loader />;  
+  if (error) {
+    return (
+      <div className="error-container">
+        <h1 className="text-red-600">Чтото пошло не так. Попробуйте позже.</h1>
+        <button
+          className="wb-btn w-62.5 p-5 text-center m-auto"
+          onClick={() => navigate("/")}
+        >
+          Домой
+        </button>
+      </div>
+    );
+  }
   return (
     <div className="flex items-start max-w-375 justify-center gap-20">
       <aside className="asid hidden md:block w-100 bg-white rounded-lg shadow p-4 mt-12">
@@ -67,7 +67,6 @@ const GetProduct = () => {
             const discountPercent = Math.round(
               ((e.price - e.discountPrice) / e.price) * 100
             );
-
             return (
               <div className="card relative mt-5 p-8 px-12" key={e.id}>
                 <div className="absolute bottom-96 left-49 w-10 h-10 bg-red-600 text-white rounded-full flex items-center justify-center text-sm font-bold">
