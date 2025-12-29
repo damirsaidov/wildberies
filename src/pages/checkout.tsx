@@ -77,7 +77,7 @@ Total: ${order.total}
         required
       />
       <button
-        className="p-4 w-100 rounded-2xl bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 disabled:opacity-50"
+        className="p-4 w-100  cursor-pointer rounded-2xl bg-blue-600 text-white font-bold shadow-lg hover:bg-blue-700 disabled:opacity-50"
         type="submit"
         disabled={loading}
       >

@@ -2,10 +2,10 @@ import React from "react";
 const Footer: React.FC = () => {
   return (
     <footer className="bg-gray-800 text-white py-8 sticky bottom-0">
-      <div className="flex items-center justify-evenly">
+      <div className="flex items-center max-w-400 m-auto justify-evenly">
         <div className="num1 flex  flex-col  items-center">
           <img src="../../logo.png" alt="" width={100} />
-          <h1 className="mt-5 text-[20px] ">Wildberries</h1>
+          <h1 className="mt-5 text-[20px] ">Wild shop</h1>
         </div>
         <div className="num2 text-center">
           <h2 className="text-[22px] font-medium ">О нас</h2>

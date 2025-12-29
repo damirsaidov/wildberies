@@ -70,7 +70,8 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: 14px 0;
+  position: relative;
+  height: 100px;
   background: linear-gradient(90deg, #be7adb, #8c2fc2);
 }
 
@@ -237,7 +238,10 @@ body {
 .dark .card-title {
   color: var(--text-dark);
 }
-
+.nav-wb{
+  position: relative;
+  bottom:20px;
+}
 .dark .gray,
 .dark .price-old {
   color: var(--text-muted-dark);
@@ -389,15 +393,14 @@ body {
 
   footer {
     margin-top: 30px;
-    *{
-      text-align: center!important;
+    * {
+      text-align: center !important;
     }
     div {
       flex-direction: column;
       gap: 20px;
-      
     }
-    .num2{
+    .num2 {
       align-items: center;
     }
   }

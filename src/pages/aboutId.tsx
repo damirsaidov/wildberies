@@ -1,4 +1,3 @@
-import { Space } from "antd";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductsByIdQuery } from "../services/api";
 import Loader from "../components/loader";
@@ -7,110 +6,128 @@ const AboutId = () => {
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductsByIdQuery(id ?? "", { skip: !id });
   if (isLoading) return <Loader />;
+  const product = data?.data;
+  const mainImage = product?.images?.[0]?.images;
   return (
-    <div className="mt-4 p-6 pb-12">
-      <h1 className="flex items-center p-2 text-xl gap-2">
-        <span onClick={() => navigate("/")}>Главная</span> {">"}
-        <span onClick={() => navigate("/products")}>Продукты</span> {">"}
-        <span>{data?.data?.productName}</span>
-      </h1>
-      <div className="mx">
-        <div className="images">
-          <Space orientation="vertical">
-            <img
-              className="dns rounded"
-              width="120px"
-              height={"138px"}
-              src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
-            />
-            <img
-              className="dns rounded"
-              width="120px"
-              height={"138px"}
-              src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
-            />
-            <img
-              className="dns rounded"
-              width="120px"
-              height={"138px"}
-              src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
-            />
-            <img
-              className="dns rounded"
-              width="120px"
-              height={"138px"}
-              src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
-            />
-          </Space>
-          <img
-            width={"500px"}
-            style={{ objectFit: "cover" }}
-            height={"600px"}
-            className="rounded"
-            src={`https://store-api.softclub.tj/images/${data?.data?.images[0]?.images}`}
-          />
-          <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-            <h1 style={{ fontSize: "36px", font: "Inter" }}>
-              {data?.data?.productName}
-            </h1>
-            <h1 style={{ fontSize: "34px", font: "Inter" }}>
-              ${data?.data?.price}
-            </h1>
-            <p
-              style={{
-                color: "gray",
-                fontSize: "24px",
-                borderBottom: "1px solid black",
-              }}
-            >
-              {data?.data?.description}
-            </p>
-            <h1
-              style={{
-                fontSize: "30px",
-                font: "Inter",
-                display: "flex",
-                alignItems: "center",
-                gap: "5px",
-                padding: "5px",
-              }}
-            >
-              Цвет:
+    <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-10">
+      <div className="mx-auto max-w-7xl">
+        <nav className="mb-6">
+          <ol className="flex items-center space-x-3 text-sm text-gray-500">
+            <li>
               <span
-                className="bordered"
-                style={{
-                  color: data?.data?.color,
-                  background: data?.data?.color,
-                  padding: "15px 15px",
-                  borderRadius: "50%",
-                }}
-              ></span>
-            </h1>
-            <div style={{ display: "flex", gap: "18px" }}>
-              <div
-                style={{
-                  display: "flex",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
+                onClick={() => navigate("/")}
+                className="cursor-pointer hover:text-indigo-600 transition-colors"
               >
-                <h1> Количество: {data?.data?.quantity} </h1>
+                Главная
+              </span>
+            </li>
+            <li>•</li>
+            <li>
+              <span
+                onClick={() => navigate("/products")}
+                className="cursor-pointer hover:text-indigo-600 transition-colors"
+              >
+                Продукты
+              </span>
+            </li>
+            <li>•</li>
+            <li className="font-medium text-gray-900 truncate max-w-60">
+              {product?.productName}
+            </li>
+          </ol>
+        </nav>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start xl:gap-16">
+          <div className="flex flex-col lg:flex-row gap-6 order-2 lg:order-1">
+            <div className="flex lg:flex-col gap-3 order-2 lg:order-1">
+              {product?.images?.slice(0, 5).map((img: any, idx: any) => (
+                <div
+                  key={idx}
+                  className={`
+                    w-20 h-20 lg:w-24 lg:h-24 shrink-0 rounded-xl overflow-hidden 
+                    border-2 transition-all cursor-pointer
+                    ${
+                      idx == 0
+                        ? "border-indigo-500 shadow-md"
+                        : "border-transparent hover:border-gray-300"
+                    }
+                  `}
+                >
+                  <img
+                    src={`https://store-api.softclub.tj/images/${img.images}`}
+                    className="w-full h-full object-cover rounded-2xl"
+                  />
+                </div>
+              ))}
+            </div>
+            <div className="flex-1 order-1 lg:order-2 rounded-2xl">
+              <img
+                src={`https://store-api.softclub.tj/images/${mainImage}`}
+                className="w-full object-cover p-4 rounded-2xl"
+              />
+            </div>
+          </div>
+          <div className="flex flex-col gap-6 order-1  lg:order-2">
+            <div>
+              <h1 className="text-3xl sm:text-4xl font-bold text-gray-700 tracking-tight">
+                {product?.productName}
+              </h1>
+
+              <div className="mt-4 text-4xl sm:text-5xl font-black text-indigo-600">
+                ${product?.price}
+                <span className="ml-2 text-2xl line-through font-normal text-gray-500">
+                  ${product?.discountPrice}
+                </span>
               </div>
             </div>
-            <button
-              style={{ display: "flex", justifySelf: "center" }}
-              className=" w-24 text-center bg-red-400 rounded-2xl text-white px-5 py-2"
-              onClick={() => navigate(-1)}
-            >
-              Назад
-            </button>
-            <button
-              style={{ display: "flex", justifySelf: "center" }}
-              className=" w-52 bg-blue-500 rounded-2xl text-white px-5 py-2"
-              onClick={() => navigate("/checkout")}
-            >
-              Перейти к покупке
-            </button>
+            {product?.description && (
+              <div className="prose prose-gray max-w-none">
+                <p className="text-lg text-gray-700 leading-relaxed">
+                  {product.description}
+                </p>
+              </div>
+            )}
+            {product?.color && (
+              <div className="flex items-center gap-4">
+                <span className="text-lg font-medium text-gray-700">Цвет:</span>
+                <div
+                  className="w-10 h-10 rounded-full shadow-md ring-1 ring-offset-2 ring-gray-200"
+                  style={{ backgroundColor: product.color }}
+                  title={product.color}
+                />
+              </div>
+            )}
+            <div className="flex items-center gap-4 text-lg">
+              <span className="font-medium text-gray-700">В наличии:</span>
+              <span className="font-bold text-emerald-600">
+                {product?.quantity} шт
+              </span>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-4 mt-6">
+              <button
+                onClick={() => navigate(-1)}
+                className="
+                  flex-1 sm:flex-none px-8 py-4 rounded-xl text-gray-700 
+                  bg-white border-2 border-gray-300 font-medium
+                  hover:bg-gray-50 hover:border-gray-400 
+                  transition-all active:scale-98 cursor-pointer
+                "
+              >
+                Назад
+              </button>
+              <button
+                onClick={() => navigate("/checkout")}
+                className="
+                  flex-1 px-8 py-4 rounded-xl font-semibold text-white
+                  bg-linear-to-r from-indigo-600 to-blue-600
+                  hover:from-indigo-700 hover:to-blue-700
+                  shadow-lg shadow-indigo-200/50
+                  transform transition-all active:scale-[0.98]
+                  cursor-pointer
+                "
+              >
+                Перейти к покупке
+              </button>
+            </div>
           </div>
         </div>
       </div>
