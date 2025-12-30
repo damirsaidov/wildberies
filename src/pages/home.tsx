@@ -101,30 +101,7 @@ const Home = () => {
         </div>
       )}
       {!isLoading && !error && (
-        <div className="flex items-start max-w-375 justify-center gap-20">
-          <aside className="asid hidden md:block w-100 bg-white rounded-lg shadow p-4 mt-12">
-            {categories.map((category: any) => (
-              <Link
-                key={category.id}
-                to={`/subCategories/${category.id}`}
-                className="group block mb-4"
-              >
-                <h3 className="text-base vit font-semibold text-gray-800 line-clamp-2 group-hover:text-blue-600 transition">
-                  {category.categoryName}
-                </h3>
-                {category.subCategories.length > 0 && (
-                  <p className="text-xs text-gray-400 mt-2">
-                    {category.subCategories
-                      ? category.subCategories.length
-                      : "0"}{' '}
-                    продуктов
-                  </p>
-                )}
-              </Link>
-            ))}
-          </aside>
-
-          <div className="pt-6">
+          <div className="pt-6 max-w-375 m-auto">
             {context}
             <Carousel
               className="car"
@@ -295,7 +272,6 @@ const Home = () => {
             </div>
             
           </div>
-        </div>
       )}
     </div>
   );

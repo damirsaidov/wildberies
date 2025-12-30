@@ -33,19 +33,21 @@ const Layout = () => {
     }
   }
   const getCart = async () => {
-    try {
-      const res = await fetch(
-        `https://store-api.softclub.tj/Cart/get-products-from-cart`,
-        {
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      const result = await res.json();
-      setData(result.data);
-    } catch (error) {
-      console.error(error);
+    if (localStorage.getItem("token")) {
+      try {
+        const res = await fetch(
+          `https://store-api.softclub.tj/Cart/get-products-from-cart`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
+        );
+        const result = await res.json();
+        setData(result.data);
+      } catch (error) {
+        console.error(error);
+      }
     }
   };
   useEffect(() => {
@@ -94,14 +96,29 @@ const Layout = () => {
                 <Drawer
                   title="Категории"
                   placement="left"
-                  onClose={onClose}
                   open={visible}
+                  onClose={onClose}
                   size={700}
+                  styles={{
+                    header: {
+                      background: darkMode ? "white" : "#0e0e11",
+                      borderBottom: darkMode
+                        ? "none"
+                        : "1px solid rgba(255,255,255,0.08)",
+                      color: darkMode ? "black" : "#fff",
+                    },
+                    body: {
+                      background:  darkMode ? "white" : "#0e0e11",
+                      color:  darkMode ?"black" : "#e6e6eb",
+                      padding: 16,
+                    },
+                  }}
                 >
                   <div style={{ display: "flex", gap: 16 }}>
                     <Menu
-                      style={{ width: 480 }}
                       mode="vertical"
+                      theme="dark"
+                      style={{ background: "transparent" }}
                       items={categ.map((c: any) => ({
                         key: String(c.id),
                         label: (
@@ -121,18 +138,21 @@ const Layout = () => {
                                 borderRadius: "8px",
                               }}
                             />
-                            <span>{c.categoryName}</span>
+                            <span style={{color:darkMode?"black":"white"}}>{c.categoryName}</span>
                           </div>
                         ),
                         onClick: () => getSubCategories(c.id),
                       }))}
                     />
                     <Menu
-                      style={{ width: 580 }}
                       mode="vertical"
+                      theme="dark"
+                      style={{ background: "transparent" }}
                       items={subcategory?.map((sc: any) => ({
                         key: String(sc.id),
-                        label: sc.subCategoryName,
+                        label: (
+                          <span style={{color:darkMode?"gray":"#fff"}}>{sc.subCategoryName}</span>
+                        ),
                         onClick: () => {
                           navigate(`/products/${sc.id}`);
                           onClose();
@@ -201,7 +221,7 @@ const Layout = () => {
                   </p>
                 </div>
                 <Switch
-                 style={{paddingBottom:"20px"}}
+                  style={{ paddingBottom: "20px" }}
                   checked={darkMode}
                   onChange={(e: any) => setDarkMode(e.target.checked)}
                 />

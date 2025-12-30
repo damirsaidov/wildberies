@@ -272,14 +272,6 @@ body {
   flex: 1 1 calc(25% - 24px);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-.dark {
-  .ant-menu {
-    * {
-      background-color: #0e0e11;
-      color: white;
-    }
-  }
-}
 @media (max-width: 1024px) {
   .card {
     flex: 1 1 calc(33% - 20px);
@@ -412,6 +404,13 @@ body {
   }
   .content {
     padding-top: 20px;
+  }
+  .nog{
+    max-width: 300px;
+    h1{
+      font-size: 21px;
+    }
+    margin: auto;
   }
   .nop {
     padding: 0;

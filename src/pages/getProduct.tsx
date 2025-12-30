@@ -38,7 +38,7 @@ const GetProduct = () => {
     );
   }
   return (
-    <div className="flex items-start max-w-375 justify-center gap-20">
+    <div className="nog flex items-start max-w-375 justify-center gap-20">
       <aside className="asid hidden md:block w-100 bg-white rounded-lg shadow p-4 mt-12">
         {categories.length > 0 ? (
           categories.map((category: any) => (
@@ -97,7 +97,6 @@ const GetProduct = () => {
           })
         ) : (
           <div className="flex flex-col justify-center m-auto">
-            <h1 className="text-red-600 text-5xl text-center p-5">404</h1>
             <h1 className="text-red-600 text-5xl text-center">
               Не найдено таких товаров!
             </h1>

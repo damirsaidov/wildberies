@@ -164,7 +164,7 @@ const Cart = () => {
         <h1 className="text-center textak text-4xl p-20 flex flex-col items-center  gap-4">
           Ваша Корзина пуста! <br />
           <span
-            className="text-2xl border-b-2 wb-btn p-4 px-8  bg-amber-600 rounded-2xl cursor-pointer"
+            className="text-2xl  border-b-2 wb-btn p-4 px-8  bg-amber-600 rounded-2xl cursor-pointer"
             onClick={() =>
               navigate(localStorage.getItem("token") ? "/products" : "/login")
             }

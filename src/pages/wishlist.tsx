@@ -91,7 +91,7 @@ const Wishlist = () => {
       {data.length == 0 ? (
         <div className="m-auto">
           <img className="max-w-60 m-auto" src="../../image-Photoroom.png" alt="" />
-          <p className="text-4xl pt-20">Ваше избранное пустое!</p>
+          <p className="text-4xl text-center pt-20">Ваше избранное пустое!</p>
           <button className="wb-btn flex justify-self-center m-auto p-2 px-4 mt-4" onClick={() => navigate(-1)}>Назад</button>
         </div>
       ) : (
