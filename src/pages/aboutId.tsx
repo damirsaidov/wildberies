@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useGetProductsByIdQuery } from "../services/api";
 import Loader from "../components/loader";
@@ -5,9 +6,10 @@ const AboutId = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
   const { data, isLoading } = useGetProductsByIdQuery(id ?? "", { skip: !id });
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   if (isLoading) return <Loader />;
   const product = data?.data;
-  const mainImage = product?.images?.[0]?.images;
+  const mainImage = product?.images?.[selectedImageIndex]?.images;
   return (
     <div className="min-h-screen py-8 px-4 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-7xl">
@@ -31,7 +33,7 @@ const AboutId = () => {
               </span>
             </li>
             <li>•</li>
-            <li className="font-medium text-gray-900 truncate max-w-60">
+            <li className="font-medium text-gray-700 truncate max-w-60">
               {product?.productName}
             </li>
           </ol>
@@ -39,14 +41,15 @@ const AboutId = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start xl:gap-16">
           <div className="flex flex-col lg:flex-row gap-6 order-2 lg:order-1">
             <div className="flex lg:flex-col gap-3 order-2 lg:order-1">
-              {product?.images?.slice(0, 5).map((img: any, idx: any) => (
+              {product?.images?.slice(0, 5).map((img: any, idx: number) => (
                 <div
                   key={idx}
+                  onClick={() => setSelectedImageIndex(idx)}
                   className={`
                     w-20 h-20 lg:w-24 lg:h-24 shrink-0 rounded-xl overflow-hidden 
                     border-2 transition-all cursor-pointer
                     ${
-                      idx == 0
+                      idx === selectedImageIndex
                         ? "border-indigo-500 shadow-md"
                         : "border-transparent hover:border-gray-300"
                     }
@@ -62,22 +65,19 @@ const AboutId = () => {
             <div className="flex-1 order-1 lg:order-2 rounded-2xl">
               <img
                 src={`https://store-api.softclub.tj/images/${mainImage}`}
-                className="w-full object-cover p-4 rounded-2xl"
+                className="w-122 object-cover p-4 rounded-2xl"
               />
             </div>
           </div>
-          <div className="flex flex-col gap-6 order-1  lg:order-2">
-            <div>
-              <h1 className="text-3xl sm:text-4xl font-bold text-gray-700 tracking-tight">
-                {product?.productName}
-              </h1>
-
-              <div className="mt-4 text-4xl sm:text-5xl font-black text-indigo-600">
-                ${product?.price}
-                <span className="ml-2 text-2xl line-through font-normal text-gray-500">
-                  ${product?.discountPrice}
-                </span>
-              </div>
+          <div className="flex flex-col gap-6 order-1 lg:order-2">
+            <h1 className="text-3xl sm:text-4xl font-bold text-gray-700 tracking-tight">
+              {product?.productName}
+            </h1>
+            <div className="mt-4 text-4xl sm:text-5xl font-black text-indigo-600">
+              ${product?.price}
+              <span className="ml-2 text-2xl line-through font-normal text-gray-500">
+                ${product?.discountPrice}
+              </span>
             </div>
             {product?.description && (
               <div className="prose prose-gray max-w-none">
@@ -105,25 +105,13 @@ const AboutId = () => {
             <div className="flex flex-col sm:flex-row gap-4 mt-6">
               <button
                 onClick={() => navigate(-1)}
-                className="
-                  flex-1 sm:flex-none px-8 py-4 rounded-xl text-gray-700 
-                  bg-white border-2 border-gray-300 font-medium
-                  hover:bg-gray-50 hover:border-gray-400 
-                  transition-all active:scale-98 cursor-pointer
-                "
+                className="flex-1 sm:flex-none px-8 py-4 rounded-xl text-gray-700 bg-white border-2 border-gray-300 font-medium hover:bg-gray-50 hover:border-gray-400 transition-all active:scale-98 cursor-pointer"
               >
                 Назад
               </button>
               <button
                 onClick={() => navigate("/checkout")}
-                className="
-                  flex-1 px-8 py-4 rounded-xl font-semibold text-white
-                  bg-linear-to-r from-indigo-600 to-blue-600
-                  hover:from-indigo-700 hover:to-blue-700
-                  shadow-lg shadow-indigo-200/50
-                  transform transition-all active:scale-[0.98]
-                  cursor-pointer
-                "
+                className="flex-1 px-8 py-4 rounded-xl font-semibold text-white bg-linear-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 shadow-lg shadow-indigo-200/50 transform transition-all active:scale-[0.98] cursor-pointer"
               >
                 Перейти к покупке
               </button>

@@ -291,6 +291,9 @@ body {
   .navbar {
     position: relative;
   }
+  .gg{
+    width: 200px!important;
+  }
   .textak {
     padding: 0;
   }

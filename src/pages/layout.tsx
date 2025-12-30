@@ -79,9 +79,9 @@ const Layout = () => {
           >
             <nav className="w-full muddmud px-4 py-2 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col mt-1 items-center">
                   <img
-                    className="w-42 h-26 pt-4 rounded object-contain cursor-pointer"
+                    className="w-42 h-26 pt-4 rounded mt-1  object-contain cursor-pointer"
                     onClick={() => navigate("/")}
                     src="../../image copy.png"
                   />

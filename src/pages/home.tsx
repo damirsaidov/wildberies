@@ -131,7 +131,7 @@ const Home = () => {
             </div>
           </Carousel>
           <div className="carts">
-            {data?.data?.products?.slice(2, 6).map((e: Product) => {
+            {data?.data?.products?.slice(1, 5).map((e: Product) => {
               const discountPercent = Math.round(
                 ((e.price - e.discountPrice) / e.price) * 100
               );
