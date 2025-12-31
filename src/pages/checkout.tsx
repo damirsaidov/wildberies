@@ -56,28 +56,28 @@ Total: ${order.total}
       {context}
       <h1 className="text-center text-2xl">Оплата</h1>
       <input
-        className="p-4 w-100 gg rounded-2xl shadow-lg border border-gray-400"
+        className="p-4 w-80 gg rounded-2xl shadow-lg border border-gray-400"
         placeholder="Имя"
         value={name}
         onChange={(e) => setName(e.target.value)}
         required
       />
       <input
-        className="p-4 w-100  gg rounded-2xl shadow-lg border border-gray-400"
+        className="p-4 w-80  gg rounded-2xl shadow-lg border border-gray-400"
         placeholder="Номер"
         value={phone}
         onChange={(e) => setPhone(e.target.value)}
         required
       />
       <input
-        className="p-4 w-100 gg rounded-2xl shadow-lg border border-gray-400"
+        className="p-4 w-80 gg rounded-2xl shadow-lg border border-gray-400"
         placeholder="Адрес"
         value={address}
         onChange={(e) => setAddress(e.target.value)}
         required
       />
       <button
-        className="p-4 w-100  cursor-pointer rounded-2xl bg-blue-600 text-white gg font-bold shadow-lg hover:bg-blue-700 disabled:opacity-50"
+        className="p-4 w-80  cursor-pointer rounded-2xl bg-blue-600 text-white gg font-bold shadow-lg hover:bg-blue-700 disabled:opacity-50"
         type="submit"
         disabled={loading}
       >
