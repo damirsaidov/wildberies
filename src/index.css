@@ -70,8 +70,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
-  position: relative;
-  height: 100px;
+  height: 90px;
   background: linear-gradient(90deg, #be7adb, #8c2fc2);
 }
 

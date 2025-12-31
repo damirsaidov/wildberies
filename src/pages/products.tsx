@@ -10,6 +10,9 @@ const Products = () => {
   const { data, isLoading } = useGetProductsQuery();
   const [messageApi, context] = useMessage();
   const [categories, setCategories] = useState<any>([]);
+  const [minPrice, setMinPrice] = useState<number>(0);
+  const [maxPrice, setMaxPrice] = useState<number>(10000);
+  const [filteredProducts, setFilteredProducts] = useState<any[]>([]);
   async function getCategory() {
     try {
       const res = await fetch(
@@ -21,6 +24,17 @@ const Products = () => {
       console.error(error);
     }
   }
+  const fetchProductsByPrice = async () => {
+    try {
+      const res = await fetch(
+        `https://store-api.softclub.tj/Product/get-products?MinPrice=${minPrice}&MaxPrice=${maxPrice}`
+      );
+      const json = await res.json();
+      setFilteredProducts(json.data?.products || []);
+    } catch (err) {
+      console.error(err);
+    }
+  };
   function addToWish(id: string) {
     const idx = localStorage.getItem("id");
     let wishlist: string[] = [];
@@ -74,6 +88,23 @@ const Products = () => {
       messageApi.error("Чтото пошло не так.");
     }
   };
+  const handleMinChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = Number(e.target.value);
+    if (val < maxPrice) setMinPrice(val);
+  };
+
+  const handleMaxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const val = Number(e.target.value);
+    if (val > minPrice) setMaxPrice(val);
+  };
+  useEffect(() => {
+    if (data?.data?.products) {
+      setFilteredProducts(data.data.products);
+    }
+  }, [data]);
+  useEffect(() => {
+    fetchProductsByPrice();
+  }, [minPrice, maxPrice]);
   useEffect(() => {
     getCategory();
   }, []);
@@ -83,6 +114,29 @@ const Products = () => {
       {context}
       <div className="flex items-start max-w-350 justify-center gap-20">
         <aside className="asid hidden md:block w-74 bg-white rounded-lg shadow p-4 mt-12">
+          <h3 className="text-lg font-semibold mb-4">Цена</h3>
+          <div className="mb-6">
+            <div className="flex justify-between mb-2">
+              <span>{minPrice} $</span>
+              <span>{maxPrice} $</span>
+            </div>
+            <input
+              type="range"
+              min="0"
+              max="10000"
+              value={minPrice}
+              onChange={handleMinChange}
+              className="w-full h-2 bg-gray-300 rounded-lg cursor-pointer mb-4"
+            />
+            <input
+              type="range"
+              min="0"
+              max="20000"
+              value={maxPrice}
+              onChange={handleMaxChange}
+              className="w-full h-2 bg-gray-300 rounded-lg cursor-pointer"
+            />
+          </div>
           {categories.map((category: any) => (
             <Link
               key={category.id}
@@ -94,14 +148,15 @@ const Products = () => {
               </h3>
               {category.subCategories.length > 0 && (
                 <p className="text-xs text-gray-400 mt-2">
-                  {category.subCategories ? category.subCategories.length : "0"} продуктов 
+                  {category.subCategories ? category.subCategories.length : "0"}{" "}
+                  продуктов
                 </p>
               )}
             </Link>
           ))}
         </aside>
-        <div className="carts justify-self-center">
-          {data?.data?.products?.map((e: any) => {
+        <div className="carts justify-self-center justify-start w-250">
+          {filteredProducts.map((e: any) => {
             const discountPercent = Math.round(
               ((e.price - e.discountPrice) / e.price) * 100
             );
@@ -132,7 +187,7 @@ const Products = () => {
                 </div>
                 <img
                   style={{
-                    borderRadius:"8px",
+                    borderRadius: "8px",
                     height: "200px",
                     objectFit: "cover",
                     margin: "auto",

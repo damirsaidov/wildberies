@@ -75,13 +75,13 @@ const Layout = () => {
         <div className="navbar">
           <div
             className="h-29 nav-wb"
-            style={{ maxWidth: "1400px", margin: "auto" }}
+            style={{ maxWidth: "1000px", margin: "auto" }}
           >
             <nav className="w-full muddmud px-4 py-2 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="flex flex-col mt-1 items-center">
+                <div className="flex flex-col items-center">
                   <img
-                    className="w-42 h-26 pt-4 rounded mt-1  object-contain cursor-pointer"
+                    className="w-42 h-26 pt-2 rounded mt-1  object-contain cursor-pointer"
                     onClick={() => navigate("/")}
                     src="../../image copy.png"
                   />
@@ -162,14 +162,14 @@ const Layout = () => {
                   </div>
                 </Drawer>
               </div>
-              <div className="drawr flex-1 mx-4 pt-6">
+              <div className="drawr flex-1 mx-4 pt-4">
                 <input
                   type="text"
                   placeholder="Найти на Wildberries"
                   className="w-full px-6 py-4.25 rounded-xl bg-white text-black focus:outline-none"
                 />
               </div>
-              <div className="cursor-pointer flex items-center gap-6 text-white pt-7">
+              <div className="cursor-pointer flex items-center gap-6 text-white pt-6">
                 <div
                   onClick={() => navigate(`/wishlist`)}
                   className="flex flex-col items-center"

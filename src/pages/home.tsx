@@ -8,13 +8,6 @@ import { IoMdHeart } from "react-icons/io";
 import { FaRegEye } from "react-icons/fa";
 import axios from "axios";
 import { Carousel } from "antd";
-interface Product {
-  id: string;
-  productName: string;
-  image: string;
-  price: number;
-  discountPrice: number;
-}
 const Home = () => {
   const [messageApi, context] = useMessage();
   const navigate = useNavigate();
@@ -131,7 +124,7 @@ const Home = () => {
             </div>
           </Carousel>
           <div className="carts">
-            {data?.data?.products?.slice(1, 5).map((e: Product) => {
+            {data?.data?.products?.slice(1, 5).map((e: any) => {
               const discountPercent = Math.round(
                 ((e.price - e.discountPrice) / e.price) * 100
               );
@@ -168,6 +161,10 @@ const Home = () => {
                     }}
                     src={`https://store-api.softclub.tj/images/${e.image}`}
                   />
+
+                  <p className="card-rating m-auto mt-2 text-sm p-2 w-fit bg-gray-200 rounded-2xl ">
+                    <span className="text-yellow-600">★</span>4.8 (26)
+                  </p>
                   <h1 className="card-title">{e.productName}</h1>
                   <p className="card-price flex gap-2 items-center mt-1 justify-center">
                     <span className="price-current text-red-600 font-bold">
@@ -177,7 +174,7 @@ const Home = () => {
                       {e.discountPrice} $
                     </span>
                   </p>
-                  <p className="card-rating pb-2">★★★★☆ (4.5)</p>
+
                   <button
                     onClick={() =>
                       localStorage.getItem("token")
@@ -192,8 +189,8 @@ const Home = () => {
               );
             })}
           </div>
-          <div className="carts">
-            {data?.data?.products?.slice(0, 4).map((e: Product) => {
+          <div className="carts ">
+            {data?.data?.products?.slice(0, 4).map((e: any) => {
               const discountPercent = Math.round(
                 ((e.price - e.discountPrice) / e.price) * 100
               );
@@ -230,6 +227,10 @@ const Home = () => {
                     }}
                     src={`https://store-api.softclub.tj/images/${e.image}`}
                   />
+
+                  <p className="card-rating m-auto mt-2 text-sm p-2 w-fit bg-gray-200 rounded-2xl ">
+                    <span className="text-yellow-600">★</span>4.8 (26)
+                  </p>
                   <h1 className="card-title">{e.productName}</h1>
                   <p className="card-price flex gap-2 items-center mt-1 justify-center">
                     <span className="price-current text-red-600 font-bold">
@@ -239,7 +240,6 @@ const Home = () => {
                       {e.discountPrice} $
                     </span>
                   </p>
-                  <p className="card-rating pb-2">★★★★☆ (4.5)</p>
                   <button
                     onClick={() =>
                       localStorage.getItem("token")

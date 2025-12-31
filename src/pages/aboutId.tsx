@@ -38,10 +38,10 @@ const AboutId = () => {
             </li>
           </ol>
         </nav>
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start xl:gap-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 place-items-start xl:gap-16">
           <div className="flex flex-col lg:flex-row gap-6 order-2 lg:order-1">
             <div className="flex lg:flex-col gap-3 order-2 lg:order-1">
-              {product?.images?.slice(0, 5).map((img: any, idx: number) => (
+              {product?.images?.map((img: any, idx: number) => (
                 <div
                   key={idx}
                   onClick={() => setSelectedImageIndex(idx)}

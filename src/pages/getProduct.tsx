@@ -3,14 +3,16 @@ import { useGetProductsByCategQuery } from "../services/api";
 import Loader from "../components/loader";
 import { useEffect, useState } from "react";
 const GetProduct = () => {
-  const { id } = useParams<{ id: string }>(); 
-  const { data, isLoading, error } = useGetProductsByCategQuery(id ?? "");  
-  const navigate = useNavigate();  
+  const { id } = useParams<{ id: string }>();
+  const { data, isLoading, error } = useGetProductsByCategQuery(id ?? "");
+  const navigate = useNavigate();
   const [categories, setCategories] = useState<any[]>([]);
   async function getCategory() {
     try {
-      const res = await fetch("https://store-api.softclub.tj/Category/get-categories");
-      const data = await res.json();      
+      const res = await fetch(
+        "https://store-api.softclub.tj/Category/get-categories"
+      );
+      const data = await res.json();
       if (data && data.data) {
         setCategories(data.data);
       } else {
@@ -23,7 +25,7 @@ const GetProduct = () => {
   useEffect(() => {
     getCategory();
   }, []);
-  if (isLoading) return <Loader />;  
+  if (isLoading) return <Loader />;
   if (error) {
     return (
       <div className="error-container">
@@ -97,6 +99,7 @@ const GetProduct = () => {
           })
         ) : (
           <div className="flex flex-col justify-center m-auto">
+            <img src="../../notfound.png" className="w-50 m-auto" />
             <h1 className="text-red-600 text-5xl text-center">
               Не найдено таких товаров!
             </h1>
